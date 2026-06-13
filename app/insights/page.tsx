@@ -75,9 +75,17 @@ export default function Insights() {
 
   return (
     <div className="min-h-screen bg-brand-50 p-6 pb-24">
-      <header className="mb-8 pt-4">
-        <h1 className="text-2xl font-bold text-brand-900">Wawasan & Analitik</h1>
-        <p className="text-brand-600 text-sm">Pahami pola tubuh dan siklusmu</p>
+      <header className="mb-6 pt-4 flex justify-between items-start">
+        <div>
+          <h1 className="text-2xl font-bold text-brand-900">Wawasan & Analitik</h1>
+          <p className="text-brand-600 text-sm">Pahami pola tubuh dan siklusmu</p>
+        </div>
+        <button 
+          onClick={() => window.location.href = '/report'}
+          className="bg-brand-500 text-white text-xs font-bold px-3 py-2 rounded-xl shadow-sm flex items-center hover:bg-brand-600 transition-colors"
+        >
+          Cetak PDF
+        </button>
       </header>
 
       {/* Health SOS Alerts */}
