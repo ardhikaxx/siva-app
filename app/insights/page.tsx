@@ -24,28 +24,17 @@ export default function Insights() {
     };
   });
 
-  // Calculate stats
-  const symptomsTally: Record<string, number> = {};
-  const moodTally: Record<string, number> = {};
-  let totalExpenseThisMonth = 0;
-
-  const currentMonthPrefix = format(new Date(), "yyyy-MM");
-
-  Object.entries(entries).forEach(([dateStr, entry]) => {
+  // Calculate most common symptoms
+  const symptomCounts: Record<string, number> = {};
+  Object.values(entries).forEach(entry => {
     if (entry.symptoms) {
       entry.symptoms.forEach((sym: string) => {
-        symptomsTally[sym] = (symptomsTally[sym] || 0) + 1;
+        symptomCounts[sym] = (symptomCounts[sym] || 0) + 1;
       });
-    }
-    if (entry.mood) {
-      moodTally[entry.mood] = (moodTally[entry.mood] || 0) + 1;
-    }
-    if (dateStr.startsWith(currentMonthPrefix) && entry.expense) {
-      totalExpenseThisMonth += entry.expense;
     }
   });
 
-  const topSymptoms = Object.entries(symptomsTally)
+  const topSymptoms = Object.entries(symptomCounts)
     .map(([name, count]) => ({ name, count }))
     .sort((a, b) => b.count - a.count)
     .slice(0, 5);
@@ -134,7 +123,7 @@ export default function Insights() {
       )}
 
       {/* Overview Cards */}
-      <div className="grid grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-2 gap-4 mb-8">
         <div className="bg-white p-4 rounded-3xl shadow-sm border border-brand-100 flex flex-col items-center justify-center text-center">
           <div className="w-10 h-10 bg-brand-100 text-brand-500 rounded-full flex items-center justify-center mb-2">
             <CalendarDays size={20} />
@@ -151,16 +140,6 @@ export default function Insights() {
           </div>
           <p className="text-xs text-brand-600 mb-1">Durasi Menstruasi</p>
           <p className="text-xl font-bold text-brand-900">{settings?.periodLength || 5} Hari</p>
-        </div>
-      </div>
-
-      <div className="bg-white p-5 rounded-3xl shadow-sm border border-brand-100 mb-8 flex justify-between items-center">
-        <div>
-          <p className="text-xs font-bold text-brand-500 uppercase tracking-wider mb-1">Biaya Kewanitaan Bulan Ini</p>
-          <p className="text-2xl font-black text-brand-900">Rp {totalExpenseThisMonth.toLocaleString('id-ID')}</p>
-        </div>
-        <div className="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
-          <span className="text-2xl">💰</span>
         </div>
       </div>
 

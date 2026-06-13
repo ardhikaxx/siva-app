@@ -123,46 +123,26 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 mb-4">
-        <button 
-          onClick={() => {
-            confirm({
-              title: 'Konfirmasi Haid',
-              text: 'Apakah Anda yakin ingin menandai hari ini sebagai hari pertama haid?',
-              confirmText: 'Ya, Tandai',
-              onConfirm: () => {
-                markPeriodStart(format(new Date(), "yyyy-MM-dd"));
-                showAlert({
-                  title: 'Berhasil!',
-                  text: 'Siklus baru Anda telah tercatat.',
-                  type: 'success'
-                });
-              }
-            });
-          }}
-          className="w-full py-4 bg-brand-100 text-brand-700 rounded-2xl font-semibold flex flex-col justify-center items-center transition-colors hover:bg-brand-200 shadow-sm border border-brand-200"
-        >
-          <Droplet size={24} className="mb-2" />
-          <span className="text-xs">Mulai Haid</span>
-        </button>
-
-        <button 
-          onClick={() => {
-            const phaseMsg = 
-              info.currentPhase === 'menstruasi' ? 'sedang haid hari ini, aku mungkin butuh banyak istirahat dan kompres hangat 🥺' :
-              info.currentPhase === 'folikular' ? 'ada di fase folikular, energiku lagi bagus nih! ✨' :
-              info.currentPhase === 'ovulasi' ? 'lagi masa subur (ovulasi) nih! 🌸' :
-              'ada di fase luteal (menjelang haid), aku mungkin agak sensitif atau gampang capek, mohon pengertiannya ya! 🥰';
-            
-            const message = encodeURIComponent(`Hai sayang, update dari SIVA nih: Aku ${phaseMsg}`);
-            window.open(`https://wa.me/?text=${message}`, '_blank');
-          }}
-          className="w-full py-4 bg-[#25D366]/10 text-[#128C7E] rounded-2xl font-semibold flex flex-col justify-center items-center transition-colors hover:bg-[#25D366]/20 shadow-sm border border-[#25D366]/30"
-        >
-          <UserCircle size={24} className="mb-2" />
-          <span className="text-xs text-center leading-tight">Beri Tahu<br/>Pasangan</span>
-        </button>
-      </div>
+      <button 
+        onClick={() => {
+          confirm({
+            title: 'Konfirmasi Haid',
+            text: 'Apakah Anda yakin ingin menandai hari ini sebagai hari pertama haid?',
+            confirmText: 'Ya, Tandai',
+            onConfirm: () => {
+              markPeriodStart(format(new Date(), "yyyy-MM-dd"));
+              showAlert({
+                title: 'Berhasil!',
+                text: 'Siklus baru Anda telah tercatat.',
+                type: 'success'
+              });
+            }
+          });
+        }}
+        className="w-full py-4 bg-brand-100 text-brand-700 rounded-2xl font-semibold flex justify-center items-center mb-4 transition-colors hover:bg-brand-200"
+      >
+        <Droplet size={20} className="mr-2" /> Tandai Hari Pertama Haid
+      </button>
 
       {/* Pad Inventory Warning */}
       {info.daysUntilNextPeriod <= 5 && (settings.padInventory === undefined || settings.padInventory < 5) && (
