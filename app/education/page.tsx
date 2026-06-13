@@ -101,15 +101,24 @@ export default function Education() {
             
             <h2 className="text-2xl font-bold text-brand-900 mb-4 leading-tight">{selectedArticle.title}</h2>
             
-            <div className="prose prose-sm text-gray-700 leading-relaxed mb-8">
+            <div className="prose prose-sm text-gray-700 leading-relaxed mb-6">
               <p>{selectedArticle.content}</p>
             </div>
 
+            <a 
+              href={`https://id.wikipedia.org/wiki/${encodeURIComponent(selectedArticle.title.replace(' (Lanjutan)', ''))}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full flex justify-center items-center bg-brand-50 text-brand-600 font-bold py-3 rounded-xl hover:bg-brand-100 transition-colors mb-3 border border-brand-200"
+            >
+              Baca Selengkapnya di Web
+            </a>
+
             <button 
               onClick={() => setSelectedArticle(null)}
-              className="w-full bg-brand-100 text-brand-700 font-bold py-3.5 rounded-xl hover:bg-brand-200 transition-colors"
+              className="w-full bg-brand-500 text-white font-bold py-3.5 rounded-xl hover:bg-brand-600 transition-colors shadow-md"
             >
-              Tutup Artikel
+              Tutup Modal
             </button>
           </div>
         </div>
