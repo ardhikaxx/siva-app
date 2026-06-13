@@ -2,10 +2,11 @@
 
 import { useJournal } from "@/hooks/useJournal";
 import { useCycleData } from "@/context/CycleContext";
-import { PieChart as PieChartIcon, Activity, TrendingUp, CalendarDays } from "lucide-react";
+import { PieChart as PieChartIcon, Activity, TrendingUp, CalendarDays, AlertTriangle, Info as InfoIcon } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Legend } from "recharts";
 import { format, parseISO, subDays } from "date-fns";
 import { id } from "date-fns/locale";
+import { analyzeHealth } from "@/lib/cycleUtils";
 
 export default function Insights() {
   const { entries } = useJournal();
@@ -27,7 +28,7 @@ export default function Insights() {
   const symptomCounts: Record<string, number> = {};
   Object.values(entries).forEach(entry => {
     if (entry.symptoms) {
-      entry.symptoms.forEach(sym => {
+      entry.symptoms.forEach((sym: string) => {
         symptomCounts[sym] = (symptomCounts[sym] || 0) + 1;
       });
     }
@@ -37,6 +38,9 @@ export default function Insights() {
     .map(([name, count]) => ({ name, count }))
     .sort((a, b) => b.count - a.count)
     .slice(0, 5);
+    
+  // Analyze Health
+  const healthAlerts = analyzeHealth(settings, entries);
 
   return (
     <div className="min-h-screen bg-brand-50 p-6 pb-24">
@@ -44,6 +48,40 @@ export default function Insights() {
         <h1 className="text-2xl font-bold text-brand-900">Wawasan & Analitik</h1>
         <p className="text-brand-600 text-sm">Pahami pola tubuh dan siklusmu</p>
       </header>
+
+      {/* Health SOS Alerts */}
+      {healthAlerts.length > 0 && (
+        <div className="mb-8 space-y-3">
+          {healthAlerts.map(alert => (
+            <div 
+              key={alert.id} 
+              className={`p-4 rounded-2xl border ${
+                alert.severity === 'danger' ? 'bg-red-50 border-red-200' :
+                alert.severity === 'warning' ? 'bg-orange-50 border-orange-200' :
+                'bg-blue-50 border-blue-200'
+              } flex items-start shadow-sm`}
+            >
+              <div className="mr-3 mt-0.5">
+                {alert.severity === 'danger' && <AlertTriangle size={20} className="text-red-500" />}
+                {alert.severity === 'warning' && <AlertTriangle size={20} className="text-orange-500" />}
+                {alert.severity === 'info' && <InfoIcon size={20} className="text-blue-500" />}
+              </div>
+              <div>
+                <h3 className={`text-sm font-bold ${
+                  alert.severity === 'danger' ? 'text-red-900' :
+                  alert.severity === 'warning' ? 'text-orange-900' :
+                  'text-blue-900'
+                }`}>{alert.title}</h3>
+                <p className={`text-xs mt-1 leading-relaxed ${
+                  alert.severity === 'danger' ? 'text-red-700' :
+                  alert.severity === 'warning' ? 'text-orange-800' :
+                  'text-blue-800'
+                }`}>{alert.message}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Overview Cards */}
       <div className="grid grid-cols-2 gap-4 mb-8">
@@ -116,6 +154,46 @@ export default function Insights() {
           </div>
         )}
       </div>
+
+      {/* Cycle History Table */}
+      {settings?.pastPeriods && settings.pastPeriods.length > 0 && (
+        <div className="bg-white p-5 rounded-3xl shadow-sm border border-brand-100 mb-6">
+          <div className="flex items-center mb-4">
+            <CalendarDays size={20} className="text-brand-500 mr-2" />
+            <h2 className="font-bold text-brand-900">Riwayat Siklus Lengkap</h2>
+          </div>
+          
+          <div className="overflow-hidden rounded-xl border border-brand-50">
+            <table className="w-full text-left text-sm">
+              <thead className="bg-brand-50 text-brand-700">
+                <tr>
+                  <th className="px-4 py-3 font-semibold">Mulai Haid</th>
+                  <th className="px-4 py-3 font-semibold text-right">Durasi Siklus</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-brand-50">
+                {[...settings.pastPeriods]
+                  .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
+                  .map((dateStr, index, arr) => {
+                    let length = "-";
+                    if (index < arr.length - 1) {
+                      const current = new Date(dateStr);
+                      const previous = new Date(arr[index + 1]);
+                      length = `${Math.round((current.getTime() - previous.getTime()) / (1000 * 60 * 60 * 24))} hari`;
+                    }
+                    return (
+                      <tr key={dateStr} className="hover:bg-brand-50/50 transition-colors">
+                        <td className="px-4 py-3 text-brand-900">{format(parseISO(dateStr), "d MMMM yyyy", { locale: id })}</td>
+                        <td className="px-4 py-3 text-right font-medium text-brand-700">{length}</td>
+                      </tr>
+                    );
+                  })
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
 
     </div>
   );
