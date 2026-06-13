@@ -14,7 +14,6 @@ export default function BottomNav() {
     { href: "/journal", label: "Jurnal", icon: BookOpen },
     { href: "/insights", label: "Analitik", icon: PieChart },
     { href: "/education", label: "Edukasi", icon: BookText },
-    { href: "/settings", label: "Profil", icon: Settings },
   ];
 
   return (

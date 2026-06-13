@@ -50,14 +50,26 @@ export default function Home() {
           <p className="text-brand-900 font-bold mt-1">Halo, {user ? user.displayName || 'Pengguna' : 'Tamu'}!</p>
           <p className="text-brand-600 text-xs mt-0.5">{format(new Date(), "EEEE, d MMMM yyyy", { locale: id })}</p>
         </div>
-        {!user && (
+        <div className="flex flex-col items-end gap-2">
+          {!user && (
+            <button 
+              onClick={() => router.push("/login")}
+              className="flex items-center bg-white text-brand-600 px-3 py-1.5 rounded-full text-xs font-medium shadow-sm border border-brand-100"
+            >
+              <UserCircle size={14} className="mr-1" /> Masuk
+            </button>
+          )}
           <button 
-            onClick={() => router.push("/login")}
-            className="flex items-center bg-white text-brand-600 px-3 py-2 rounded-full text-sm font-medium shadow-sm"
+            onClick={() => router.push("/settings")}
+            className="w-10 h-10 rounded-full bg-white text-brand-600 flex items-center justify-center shadow-sm border border-brand-100"
           >
-            <UserCircle size={18} className="mr-1" /> Masuk
+            {user?.photoURL ? (
+              <img src={user.photoURL} alt="Profil" className="w-full h-full object-cover rounded-full" />
+            ) : (
+              <UserCircle size={20} />
+            )}
           </button>
-        )}
+        </div>
       </header>
 
       <motion.div 
