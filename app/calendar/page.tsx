@@ -120,6 +120,7 @@ export default function Calendar() {
                 {/* Indicators container */}
                 <div className="absolute bottom-1 flex gap-0.5">
                   {hasEntry && <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>}
+                  {entries[dateKey]?.medications && entries[dateKey].medications.length > 0 && <div className="w-1.5 h-1.5 rounded-full bg-orange-400"></div>}
                   {phase === "menstruasi" && isSameMnth && <div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div>}
                 </div>
               </div>
@@ -169,6 +170,19 @@ export default function Calendar() {
                       {selectedEntry.symptoms.map(s => (
                         <span key={s} className="bg-white text-xs px-2 py-1 rounded border border-brand-100 text-gray-600">
                           {s}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {selectedEntry.medications && selectedEntry.medications.length > 0 && (
+                  <div className="mt-2">
+                    <span className="font-semibold text-sm text-brand-800 block mb-1">Obat & Suplemen:</span>
+                    <div className="flex flex-wrap gap-1">
+                      {selectedEntry.medications.map(m => (
+                        <span key={m} className="bg-blue-50 text-blue-700 text-xs px-2 py-1 rounded border border-blue-100">
+                          💊 {m}
                         </span>
                       ))}
                     </div>
