@@ -2,7 +2,7 @@
 
 import { useJournal } from "@/hooks/useJournal";
 import { useCycleData } from "@/context/CycleContext";
-import { PieChart as PieChartIcon, Activity, TrendingUp, CalendarDays, AlertTriangle, Info as InfoIcon } from "lucide-react";
+import { PieChart as PieChartIcon, Activity, TrendingUp, CalendarDays, AlertTriangle, Info as InfoIcon, Smile } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Legend } from "recharts";
 import { format, parseISO, subDays } from "date-fns";
 import { id } from "date-fns/locale";
@@ -38,6 +38,37 @@ export default function Insights() {
     .map(([name, count]) => ({ name, count }))
     .sort((a, b) => b.count - a.count)
     .slice(0, 5);
+
+  // Calculate mood per phase correlation
+  const phaseMoods: Record<string, Record<string, number>> = {
+    menstruasi: {},
+    folikular: {},
+    ovulasi: {},
+    luteal: {}
+  };
+
+  Object.values(entries).forEach(entry => {
+    if (entry.cyclePhaseAtEntry && entry.mood) {
+      const phase = entry.cyclePhaseAtEntry;
+      const mood = entry.mood;
+      if (phaseMoods[phase]) {
+        phaseMoods[phase][mood] = (phaseMoods[phase][mood] || 0) + 1;
+      }
+    }
+  });
+
+  const getDominantMood = (phase: string) => {
+    const moods = phaseMoods[phase];
+    if (Object.keys(moods).length === 0) return null;
+    return Object.entries(moods).reduce((a, b) => a[1] > b[1] ? a : b)[0];
+  };
+
+  const phaseMoodInsights = [
+    { phase: "Menstruasi", mood: getDominantMood("menstruasi"), color: "bg-brand-100 text-brand-700" },
+    { phase: "Folikular", mood: getDominantMood("folikular"), color: "bg-blue-100 text-blue-700" },
+    { phase: "Ovulasi", mood: getDominantMood("ovulasi"), color: "bg-purple-100 text-purple-700" },
+    { phase: "Luteal", mood: getDominantMood("luteal"), color: "bg-yellow-100 text-yellow-700" },
+  ].filter(item => item.mood);
     
   // Analyze Health
   const healthAlerts = analyzeHealth(settings, entries);
@@ -151,6 +182,32 @@ export default function Insights() {
         ) : (
           <div className="text-center py-8">
             <p className="text-brand-400 text-sm">Belum ada data gejala yang dicatat di jurnal.</p>
+          </div>
+        )}
+      </div>
+
+      {/* Mood Correlation Chart/Cards */}
+      <div className="bg-white p-5 rounded-3xl shadow-sm border border-brand-100 mb-6">
+        <div className="flex items-center mb-4">
+          <Smile size={20} className="text-brand-500 mr-2" />
+          <h2 className="font-bold text-brand-900">Korelasi Suasana Hati</h2>
+        </div>
+        
+        {phaseMoodInsights.length > 0 ? (
+          <div className="space-y-3">
+            <p className="text-xs text-gray-500 mb-2">Suasana hati yang paling dominan di setiap fase berdasarkan catatan Anda:</p>
+            {phaseMoodInsights.map((insight) => (
+              <div key={insight.phase} className="flex justify-between items-center p-3 rounded-2xl bg-gray-50 border border-gray-100">
+                <span className="text-sm font-semibold text-gray-700">Fase {insight.phase}</span>
+                <span className={`text-xs font-bold px-3 py-1 rounded-full ${insight.color}`}>
+                  {insight.mood}
+                </span>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-6">
+            <p className="text-brand-400 text-sm">Belum cukup data suasana hati untuk dianalisis.</p>
           </div>
         )}
       </div>

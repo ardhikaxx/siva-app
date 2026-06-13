@@ -32,6 +32,7 @@ export default function Journal() {
   const [energy, setEnergy] = useState(3);
   const [symptoms, setSymptoms] = useState<string[]>([]);
   const [medications, setMedications] = useState<string[]>([]);
+  const [waterGlasses, setWaterGlasses] = useState(0);
   const [notes, setNotes] = useState("");
   const [isSaved, setIsSaved] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -45,6 +46,7 @@ export default function Journal() {
           setEnergy(todayEntry.energyLevel || 3);
           setSymptoms(todayEntry.symptoms || []);
           setMedications(todayEntry.medications || []);
+          setWaterGlasses(todayEntry.waterGlasses || 0);
           setNotes(todayEntry.notes || "");
         }, 0);
       }
@@ -76,6 +78,7 @@ export default function Journal() {
         energyLevel: energy,
         symptoms,
         medications,
+        waterGlasses,
         notes,
         cyclePhaseAtEntry: info?.currentPhase || "unknown"
       });
@@ -202,6 +205,30 @@ export default function Journal() {
             </div>
           </div>
 
+          <div className="bg-white p-6 rounded-3xl shadow-sm border border-brand-100">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-sm font-semibold text-brand-900">Konsumsi Air</h2>
+              <span className="text-xs font-bold text-blue-500 bg-blue-50 px-2 py-1 rounded-full">{waterGlasses} / 8 Gelas</span>
+            </div>
+            <div className="flex items-center space-x-4">
+              <button 
+                type="button"
+                onClick={() => setWaterGlasses(Math.max(0, waterGlasses - 1))}
+                className="w-10 h-10 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center font-bold text-xl"
+              >-</button>
+              <div className="flex-1 flex justify-center gap-1">
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <div key={i} className={`h-6 w-4 rounded-b-md ${i < waterGlasses ? 'bg-blue-400' : 'bg-gray-100'}`}></div>
+                ))}
+              </div>
+              <button 
+                type="button"
+                onClick={() => setWaterGlasses(waterGlasses + 1)}
+                className="w-10 h-10 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center font-bold text-xl"
+              >+</button>
+            </div>
+          </div>
+
           <button 
             type="submit"
             disabled={isSaving}
@@ -261,6 +288,12 @@ export default function Journal() {
                         💊 {m}
                       </span>
                     ))}
+                  </div>
+                )}
+
+                {(entry.waterGlasses ?? 0) > 0 && (
+                  <div className="flex items-center text-xs text-blue-600 font-medium mb-3">
+                    💧 {entry.waterGlasses} Gelas Air
                   </div>
                 )}
                 

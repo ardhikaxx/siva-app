@@ -121,6 +121,7 @@ export default function Calendar() {
                 <div className="absolute bottom-1 flex gap-0.5">
                   {hasEntry && <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>}
                   {entries[dateKey]?.medications && entries[dateKey].medications.length > 0 && <div className="w-1.5 h-1.5 rounded-full bg-orange-400"></div>}
+                  {(entries[dateKey]?.waterGlasses ?? 0) >= 8 && <div className="w-1.5 h-1.5 rounded-full bg-cyan-400"></div>}
                   {phase === "menstruasi" && isSameMnth && <div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div>}
                 </div>
               </div>
@@ -186,6 +187,12 @@ export default function Calendar() {
                         </span>
                       ))}
                     </div>
+                  </div>
+                )}
+
+                {(selectedEntry.waterGlasses ?? 0) > 0 && (
+                  <div className="mt-3 flex items-center text-sm font-semibold text-cyan-700 bg-cyan-50 px-3 py-2 rounded-xl border border-cyan-100">
+                    💧 Air Minum: {selectedEntry.waterGlasses} Gelas
                   </div>
                 )}
 

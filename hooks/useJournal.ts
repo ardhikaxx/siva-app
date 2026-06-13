@@ -4,12 +4,14 @@ import { db } from "@/lib/firebase";
 import { ref, onValue, set, get } from "firebase/database";
 
 export interface JournalEntry {
-  mood: string;
-  energyLevel: number;
-  symptoms: string[];
+  date?: string;
+  mood?: string;
+  energyLevel?: number;
+  symptoms?: string[];
   medications?: string[];
-  notes: string;
-  cyclePhaseAtEntry: string;
+  waterGlasses?: number; // Target: 8 glasses
+  notes?: string;
+  cyclePhaseAtEntry?: string; // Phase during that day
 }
 
 export function useJournal() {
