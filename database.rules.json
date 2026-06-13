@@ -1,0 +1,14 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid"
+      }
+    },
+    "admin": {
+      ".read": "auth.token.role === 'admin'",
+      ".write": "auth.token.role === 'admin'"
+    }
+  }
+}

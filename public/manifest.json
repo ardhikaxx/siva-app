@@ -1,0 +1,9 @@
+{
+  "name": "SIVA (Siklus Interaktif Vitalitas wanitA)",
+  "short_name": "SIVA",
+  "description": "Siklus Interaktif Vitalitas wanitA",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fff0f3",
+  "theme_color": "#ff758f"
+}

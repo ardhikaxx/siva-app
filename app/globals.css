@@ -1,26 +1,33 @@
 @import "tailwindcss";
+@source "../components";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-brand-50: #fff0f3;
+  --color-brand-100: #ffe3e8;
+  --color-brand-200: #ffcdd6;
+  --color-brand-300: #ffa3b4;
+  --color-brand-400: #ff6f8c;
+  --color-brand-500: #fa3c61;
+  --color-brand-600: #e31841;
+  --color-brand-700: #c00c2e;
+  --color-brand-800: #a20e2b;
+  --color-brand-900: #881028;
+  --color-brand-950: #4c0411;
+
+  --color-phase-menstruasi: #fa3c61;
+  --color-phase-folikular: #38bdf8;
+  --color-phase-ovulasi: #a855f7;
+  --color-phase-luteal: #fbbf24;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #fff0f3;
+    --foreground: #4c0411;
   }
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--background);
 }
