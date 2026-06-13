@@ -45,8 +45,9 @@ function OnboardingContent() {
     
     await updateSettings({
       lastPeriodStart: formatISO(new Date(lastPeriodStart), { representation: "date" }),
-      cycleLength,
-      periodLength,
+      cycleLength: Number(cycleLength),
+      periodLength: Number(periodLength),
+      pastPeriods: [formatISO(new Date(lastPeriodStart), { representation: "date" })]
     });
     
     router.push("/");
