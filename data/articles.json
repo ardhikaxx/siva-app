@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "category": "Mitos & Fakta",
+    "title": "Mitos: Tidak Boleh Keramas Saat Haid",
+    "content": "Ini adalah mitos kuno! Tidak ada bukti medis yang melarang keramas saat haid. Faktanya, mandi dan keramas dengan air hangat justru dapat meredakan ketegangan otot, melancarkan aliran darah, dan membuat Anda merasa lebih bersih serta rileks saat kram.",
+    "readTime": "1 Min"
+  },
+  {
+    "id": 2,
+    "category": "Tips Nyeri",
+    "title": "Kompres Panas untuk Meredakan Dismenore (Kram)",
+    "content": "Kram perut (dismenore) terjadi karena kontraksi otot rahim. Menempelkan kompres panas (bantal pemanas atau botol air panas) di area perut bawah dapat membantu merelaksasi otot rahim yang tegang, meningkatkan aliran darah, dan secara efektif mengurangi rasa sakit.",
+    "readTime": "2 Min"
+  },
+  {
+    "id": 3,
+    "category": "Gizi & Diet",
+    "title": "Zat Besi: Penyelamat Saat Haid Deras",
+    "content": "Kehilangan darah saat menstruasi berarti kehilangan zat besi, yang bisa memicu anemia ringan dan rasa sangat lelah. Perbanyak konsumsi makanan kaya zat besi seperti bayam, daging merah tanpa lemak, dan kacang-kacangan selama fase menstruasi Anda.",
+    "readTime": "2 Min"
+  },
+  {
+    "id": 4,
+    "category": "Fase Siklus",
+    "title": "Mengapa Saya Sangat Produktif di Fase Folikular?",
+    "content": "Fase Folikular (setelah haid selesai hingga ovulasi) sering disebut fase 'musim semi' siklus Anda. Kadar estrogen mulai meningkat, memberikan dorongan energi, meningkatkan *mood*, dan mempertajam fokus kognitif. Ini adalah waktu terbaik untuk memulai proyek baru!",
+    "readTime": "3 Min"
+  },
+  {
+    "id": 5,
+    "category": "Gizi & Diet",
+    "title": "Kurangi Kafein Saat Kram Melanda",
+    "content": "Minum kopi mungkin terasa enak, tetapi kafein dapat mempersempit pembuluh darah (vasokonstriksi), termasuk pembuluh darah di rahim. Ini dapat memperburuk kram perut. Cobalah ganti dengan teh *chamomile* atau teh *peppermint* tanpa kafein.",
+    "readTime": "1 Min"
+  },
+  {
+    "id": 6,
+    "category": "Mitos & Fakta",
+    "title": "Fakta: Olahraga Ringan Justru Mengurangi Nyeri",
+    "content": "Meskipun Anda mungkin hanya ingin berbaring, olahraga ringan seperti jalan kaki santai atau yoga terbukti melepaskan endorfin—pembunuh rasa sakit alami tubuh. Hindari olahraga angkat beban yang terlalu berat jika Anda merasa lelah.",
+    "readTime": "2 Min"
+  },
+  {
+    "id": 7,
+    "category": "Kesehatan Seksual",
+    "title": "Apakah Bisa Hamil Walaupun Sedang Haid?",
+    "content": "Ya, meskipun kemungkinannya kecil. Sperma dapat bertahan hidup di dalam saluran reproduksi wanita hingga 5 hari. Jika Anda memiliki siklus yang sangat pendek, Anda bisa berovulasi segera setelah haid selesai, sehingga pertemuan sel telur dan sperma masih bisa terjadi.",
+    "readTime": "3 Min"
+  },
+  {
+    "id": 8,
+    "category": "Mitos & Fakta",
+    "title": "Mitos: PMS Hanya Alasan Emosional",
+    "content": "Sindrom Pramenstruasi (PMS) sangat nyata secara biologis. Fluktuasi drastis antara hormon estrogen dan progesteron seminggu sebelum haid secara langsung memengaruhi *neurotransmitter* di otak (seperti serotonin), yang benar-benar mengubah suasana hati Anda.",
+    "readTime": "2 Min"
+  },
+  {
+    "id": 9,
+    "category": "Tips Nyeri",
+    "title": "Posisi Tidur Meringkuk untuk Meredakan Nyeri",
+    "content": "Tidur dengan posisi 'Fetal' (meringkuk seperti janin) mengambil tekanan dari otot-otot perut, merelaksasi otot kerangka di sekitar panggul, dan meminimalisir kemungkinan kebocoran pembalut di malam hari.",
+    "readTime": "1 Min"
+  },
+  {
+    "id": 10,
+    "category": "Fase Siklus",
+    "title": "Mengenal Fase Luteal dan Penyebab Jerawat",
+    "content": "Setelah masa subur (ovulasi), tubuh masuk ke Fase Luteal. Jika tidak terjadi kehamilan, kadar progesteron meningkat lalu turun tajam. Progesteron merangsang kelenjar sebaceous untuk memproduksi lebih banyak sebum (minyak), yang menjadi alasan utama mengapa jerawat haid muncul.",
+    "readTime": "3 Min"
+  }
+]

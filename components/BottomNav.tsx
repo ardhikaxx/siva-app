@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, CalendarDays, BookOpen, Settings, PieChart } from "lucide-react";
+import { Home, CalendarDays, BookOpen, Settings, PieChart, BookText } from "lucide-react";
 
 export default function BottomNav() {
   const pathname = usePathname();
@@ -13,6 +13,7 @@ export default function BottomNav() {
     { href: "/calendar", label: "Kalender", icon: CalendarDays },
     { href: "/journal", label: "Jurnal", icon: BookOpen },
     { href: "/insights", label: "Analitik", icon: PieChart },
+    { href: "/education", label: "Edukasi", icon: BookText },
     { href: "/settings", label: "Profil", icon: Settings },
   ];
 

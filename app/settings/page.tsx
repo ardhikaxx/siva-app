@@ -9,15 +9,17 @@ import { LogOut, User, Settings as SettingsIcon, AlertCircle, Trash2, Moon, Sun 
 import { useAlert } from "@/context/AlertContext";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { useNotifications } from "@/hooks/useNotifications";
 
 export default function Settings() {
   const { user, signOut } = useAuth();
   const { settings, updateSettings } = useCycleData();
   const router = useRouter();
-  const { confirm } = useAlert();
+  const { confirm, showAlert } = useAlert();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [imgError, setImgError] = useState(false);
+  const { permission, requestPermission, sendTestNotification } = useNotifications();
 
   useEffect(() => {
     setTimeout(() => setMounted(true), 0);
@@ -143,6 +145,44 @@ export default function Settings() {
           >
             Ubah Pengaturan Siklus
           </button>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-3xl shadow-sm border border-brand-100 overflow-hidden mb-6">
+        <div className="p-4 border-b border-brand-50 flex items-center">
+          <AlertCircle size={20} className="text-brand-500 mr-3" />
+          <h3 className="font-semibold text-brand-900">Notifikasi & Pengingat</h3>
+        </div>
+        <div className="p-4 space-y-4">
+          <div className="flex justify-between items-center">
+            <div>
+              <span className="text-sm text-brand-700 block font-medium">Izin Notifikasi</span>
+              <span className="text-xs text-brand-400">{permission === 'granted' ? 'Diizinkan' : 'Belum Diizinkan'}</span>
+            </div>
+            {permission !== 'granted' && (
+              <button 
+                onClick={async () => {
+                  const granted = await requestPermission();
+                  if (granted) showAlert({ title: "Berhasil", text: "Notifikasi SIVA telah diaktifkan!", type: "success" });
+                }}
+                className="bg-brand-500 text-white text-xs font-semibold px-3 py-1.5 rounded-lg"
+              >
+                Izinkan
+              </button>
+            )}
+          </div>
+          
+          <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2">
+            <div>
+              <span className="text-sm text-brand-700 block">Pengingat Harian (Test)</span>
+            </div>
+            <button
+              onClick={sendTestNotification}
+              className="w-12 h-6 bg-brand-200 rounded-full relative flex items-center px-1"
+            >
+              <div className={`w-4 h-4 rounded-full bg-brand-500 transition-transform ${permission === 'granted' ? 'translate-x-6' : ''}`}></div>
+            </button>
+          </div>
         </div>
       </div>
 
