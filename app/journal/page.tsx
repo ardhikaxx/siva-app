@@ -33,6 +33,7 @@ export default function Journal() {
   const [symptoms, setSymptoms] = useState<string[]>([]);
   const [medications, setMedications] = useState<string[]>([]);
   const [waterGlasses, setWaterGlasses] = useState(0);
+  const [expense, setExpense] = useState(0);
   const [notes, setNotes] = useState("");
   const [isSaved, setIsSaved] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -48,6 +49,7 @@ export default function Journal() {
           setMedications(todayEntry.medications || []);
           setWaterGlasses(todayEntry.waterGlasses || 0);
           setNotes(todayEntry.notes || "");
+          setExpense(todayEntry.expense || 0);
         }, 0);
       }
     }
@@ -79,6 +81,7 @@ export default function Journal() {
         symptoms,
         medications,
         waterGlasses,
+        expense,
         notes,
         cyclePhaseAtEntry: info?.currentPhase || "unknown"
       });
@@ -180,6 +183,21 @@ export default function Journal() {
           </div>
 
           <div className="bg-white p-6 rounded-3xl shadow-sm border border-brand-100">
+            <h2 className="text-sm font-semibold text-brand-900 mb-4 flex items-center">💰 Biaya Kewanitaan (Pink Tax)</h2>
+            <div className="relative">
+              <span className="absolute left-4 top-3.5 text-brand-500 font-bold">Rp</span>
+              <input 
+                type="number"
+                placeholder="0"
+                value={expense || ''}
+                onChange={(e) => setExpense(parseInt(e.target.value) || 0)}
+                className="w-full pl-12 pr-4 py-3 bg-brand-50 border-none rounded-xl text-brand-900 focus:outline-none focus:ring-2 focus:ring-brand-400 font-medium text-sm"
+              />
+            </div>
+            <p className="text-[10px] text-brand-500 mt-2 ml-1">Catat biaya beli pembalut, obat kram, dokter, dsb.</p>
+          </div>
+
+          <div className="bg-white p-6 rounded-3xl shadow-sm border border-brand-100">
             <h2 className="text-sm font-semibold text-brand-900 mb-4">Catatan Tambahan</h2>
             <textarea 
               value={notes}
@@ -210,7 +228,7 @@ export default function Journal() {
               <h2 className="text-sm font-semibold text-brand-900">Konsumsi Air</h2>
               <span className="text-xs font-bold text-blue-500 bg-blue-50 px-2 py-1 rounded-full">{waterGlasses} / 8 Gelas</span>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 mb-6">
               <button 
                 type="button"
                 onClick={() => setWaterGlasses(Math.max(0, waterGlasses - 1))}
@@ -294,6 +312,12 @@ export default function Journal() {
                 {(entry.waterGlasses ?? 0) > 0 && (
                   <div className="flex items-center text-xs text-blue-600 font-medium mb-3">
                     💧 {entry.waterGlasses} Gelas Air
+                  </div>
+                )}
+
+                {(entry.expense ?? 0) > 0 && (
+                  <div className="flex items-center text-xs text-brand-600 font-bold mb-3">
+                    💰 Rp {entry.expense?.toLocaleString('id-ID')}
                   </div>
                 )}
                 
