@@ -7,6 +7,7 @@ export interface JournalEntry {
   mood: string;
   energyLevel: number;
   symptoms: string[];
+  medications?: string[];
   notes: string;
   cyclePhaseAtEntry: string;
 }
