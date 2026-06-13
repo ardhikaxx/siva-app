@@ -172,4 +172,39 @@ body {
     --color-brand-900: #fae8ff;
     --color-brand-950: #fdf4ff;
   }
+
+  :root[data-theme="lavender"] {
+    --background: #faf5ff;
+    --foreground: #581c87;
+    --card-bg: #ffffff;
+    --card-border: #f3e8ff;
+    --color-brand-50: #faf5ff;
+    --color-brand-100: #f3e8ff;
+    --color-brand-200: #e9d5ff;
+    --color-brand-300: #d8b4fe;
+    --color-brand-400: #c084fc;
+    --color-brand-500: #a855f7;
+    --color-brand-600: #9333ea;
+    --color-brand-700: #7e22ce;
+    --color-brand-800: #6b21a8;
+    --color-brand-900: #581c87;
+    --color-brand-950: #3b0764;
+  }
+  .dark[data-theme="lavender"] {
+    --background: #3b0764;
+    --foreground: #faf5ff;
+    --card-bg: #581c87;
+    --card-border: #6b21a8;
+    --color-brand-50: #3b0764;
+    --color-brand-100: #581c87;
+    --color-brand-200: #6b21a8;
+    --color-brand-300: #7e22ce;
+    --color-brand-400: #9333ea;
+    --color-brand-500: #a855f7;
+    --color-brand-600: #c084fc;
+    --color-brand-700: #d8b4fe;
+    --color-brand-800: #e9d5ff;
+    --color-brand-900: #f3e8ff;
+    --color-brand-950: #faf5ff;
+  }
 }

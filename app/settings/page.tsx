@@ -125,6 +125,7 @@ export default function Settings() {
               <button onClick={() => updateSettings({ ...settings!, themeColor: "matcha" })} className={`w-6 h-6 rounded-full bg-[#22c55e] ${settings?.themeColor === 'matcha' ? 'ring-2 ring-offset-2 ring-green-500' : ''}`} />
               <button onClick={() => updateSettings({ ...settings!, themeColor: "ocean" })} className={`w-6 h-6 rounded-full bg-[#3b82f6] ${settings?.themeColor === 'ocean' ? 'ring-2 ring-offset-2 ring-blue-500' : ''}`} />
               <button onClick={() => updateSettings({ ...settings!, themeColor: "cyberpunk" })} className={`w-6 h-6 rounded-full bg-[#d946ef] ${settings?.themeColor === 'cyberpunk' ? 'ring-2 ring-offset-2 ring-fuchsia-500' : ''}`} />
+              <button onClick={() => updateSettings({ ...settings!, themeColor: "lavender" })} className={`w-6 h-6 rounded-full bg-[#a855f7] ${settings?.themeColor === 'lavender' ? 'ring-2 ring-offset-2 ring-purple-500' : ''}`} />
             </div>
           </div>
 

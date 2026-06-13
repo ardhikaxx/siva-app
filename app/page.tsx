@@ -144,6 +144,22 @@ export default function Home() {
         <Droplet size={20} className="mr-2" /> Tandai Hari Pertama Haid
       </button>
 
+      {/* Sisterhood Forum Banner */}
+      <div 
+        onClick={() => window.location.href = '/community'}
+        className="mb-4 w-full bg-gradient-to-r from-brand-500 to-purple-500 rounded-2xl p-5 text-white shadow-md cursor-pointer hover:shadow-lg transition-all flex items-center justify-between"
+      >
+        <div>
+          <h3 className="font-bold text-lg mb-1 flex items-center">
+            SIVA Sisterhood <span className="ml-2 text-xs bg-white/20 px-2 py-0.5 rounded-full">Baru</span>
+          </h3>
+          <p className="text-xs text-white/80">Forum cerita & dukungan anonim wanita.</p>
+        </div>
+        <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+          <span className="text-xl">💬</span>
+        </div>
+      </div>
+
       {/* Pad Inventory Warning */}
       {info.daysUntilNextPeriod <= 5 && (settings.padInventory === undefined || settings.padInventory < 5) && (
         <div className="bg-orange-50 border border-orange-200 p-4 rounded-2xl flex items-start mb-6">

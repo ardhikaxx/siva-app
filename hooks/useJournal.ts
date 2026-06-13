@@ -11,6 +11,9 @@ export interface JournalEntry {
   medications?: string[];
   waterGlasses?: number; // Target: 8 glasses
   notes?: string;
+  expense?: number;
+  temperature?: number;
+  weight?: number;
   cyclePhaseAtEntry?: string; // Phase during that day
 }
 

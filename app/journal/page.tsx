@@ -33,6 +33,8 @@ export default function Journal() {
   const [symptoms, setSymptoms] = useState<string[]>([]);
   const [medications, setMedications] = useState<string[]>([]);
   const [waterGlasses, setWaterGlasses] = useState(0);
+  const [temperature, setTemperature] = useState<number | ''>('');
+  const [weight, setWeight] = useState<number | ''>('');
   const [notes, setNotes] = useState("");
   const [isSaved, setIsSaved] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -47,6 +49,8 @@ export default function Journal() {
           setSymptoms(todayEntry.symptoms || []);
           setMedications(todayEntry.medications || []);
           setWaterGlasses(todayEntry.waterGlasses || 0);
+          setTemperature(todayEntry.temperature || '');
+          setWeight(todayEntry.weight || '');
           setNotes(todayEntry.notes || "");
         }, 0);
       }
@@ -79,6 +83,8 @@ export default function Journal() {
         symptoms,
         medications,
         waterGlasses,
+        temperature: typeof temperature === 'number' ? temperature : undefined,
+        weight: typeof weight === 'number' ? weight : undefined,
         notes,
         cyclePhaseAtEntry: info?.currentPhase || "unknown"
       });
@@ -177,6 +183,35 @@ export default function Journal() {
                 </button>
               ))}
             </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-3xl shadow-sm border border-brand-100">
+            <h2 className="text-sm font-semibold text-brand-900 mb-4 flex items-center">🌡️ Metrik Fisik Harian</h2>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="text-xs text-brand-600 font-medium block mb-2">Suhu Basal Tubuh (°C)</label>
+                <input 
+                  type="number"
+                  step="0.01"
+                  placeholder="Contoh: 36.5"
+                  value={temperature}
+                  onChange={(e) => setTemperature(e.target.value ? parseFloat(e.target.value) : '')}
+                  className="w-full px-4 py-3 bg-brand-50 border-none rounded-xl text-brand-900 focus:outline-none focus:ring-2 focus:ring-brand-400 font-medium text-sm"
+                />
+              </div>
+              <div>
+                <label className="text-xs text-brand-600 font-medium block mb-2">Berat Badan (Kg)</label>
+                <input 
+                  type="number"
+                  step="0.1"
+                  placeholder="Contoh: 55.2"
+                  value={weight}
+                  onChange={(e) => setWeight(e.target.value ? parseFloat(e.target.value) : '')}
+                  className="w-full px-4 py-3 bg-brand-50 border-none rounded-xl text-brand-900 focus:outline-none focus:ring-2 focus:ring-brand-400 font-medium text-sm"
+                />
+              </div>
+            </div>
+            <p className="text-[10px] text-brand-500 mt-3 ml-1">Suhu tubuh basal (BBT) sangat berguna untuk melacak ovulasi.</p>
           </div>
 
           <div className="bg-white p-6 rounded-3xl shadow-sm border border-brand-100">
@@ -294,6 +329,13 @@ export default function Journal() {
                 {(entry.waterGlasses ?? 0) > 0 && (
                   <div className="flex items-center text-xs text-blue-600 font-medium mb-3">
                     💧 {entry.waterGlasses} Gelas Air
+                  </div>
+                )}
+
+                {(entry.temperature || entry.weight) && (
+                  <div className="flex items-center gap-4 text-xs font-bold text-brand-700 mb-3 bg-brand-50 p-2 rounded-xl border border-brand-100">
+                    {entry.temperature && <span>🌡️ {entry.temperature} °C</span>}
+                    {entry.weight && <span>⚖️ {entry.weight} kg</span>}
                   </div>
                 )}
                 
