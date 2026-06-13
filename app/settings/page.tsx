@@ -117,7 +117,17 @@ export default function Settings() {
           </div>
 
           <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2">
-            <span className="text-sm text-brand-700 flex items-center"><Moon size={16} className="mr-2" /> Tampilan Gelap (Dark Mode)</span>
+            <span className="text-sm text-brand-700">Tema Warna</span>
+            <div className="flex gap-2">
+              <button onClick={() => updateSettings({ ...settings!, themeColor: "peach" })} className={`w-6 h-6 rounded-full bg-[#fa3c61] ${(!settings?.themeColor || settings.themeColor === 'peach') ? 'ring-2 ring-offset-2 ring-brand-500' : ''}`} />
+              <button onClick={() => updateSettings({ ...settings!, themeColor: "matcha" })} className={`w-6 h-6 rounded-full bg-[#22c55e] ${settings?.themeColor === 'matcha' ? 'ring-2 ring-offset-2 ring-green-500' : ''}`} />
+              <button onClick={() => updateSettings({ ...settings!, themeColor: "ocean" })} className={`w-6 h-6 rounded-full bg-[#3b82f6] ${settings?.themeColor === 'ocean' ? 'ring-2 ring-offset-2 ring-blue-500' : ''}`} />
+              <button onClick={() => updateSettings({ ...settings!, themeColor: "cyberpunk" })} className={`w-6 h-6 rounded-full bg-[#d946ef] ${settings?.themeColor === 'cyberpunk' ? 'ring-2 ring-offset-2 ring-fuchsia-500' : ''}`} />
+            </div>
+          </div>
+
+          <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2">
+            <span className="text-sm text-brand-700 flex items-center"><Moon size={16} className="mr-2" /> Tampilan Gelap</span>
             {mounted && (
               <button
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}

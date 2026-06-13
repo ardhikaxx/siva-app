@@ -6,9 +6,10 @@ export interface CycleSettings {
   lastPeriodStart: string; // ISO Date String
   cycleLength: number;
   periodLength: number;
-  pastPeriods?: string[]; // Array of ISO Date Strings (e.g. ['2023-01-01', '2023-01-29', '2023-02-27'])
+  pastPeriods?: string[]; // Array of ISO Date Strings
   isSmartPrediction?: boolean; // Flag if we are using calculated average
   padInventory?: number; // Stock of sanitary pads
+  themeColor?: "peach" | "matcha" | "ocean" | "cyberpunk";
 }
 
 export interface CycleInfo {

@@ -75,9 +75,21 @@ export const CycleProvider = ({ children }: { children: React.ReactNode }) => {
           setInfo(null);
         }
         setLoading(false);
+        setLoading(false);
       }, 0);
     }
   }, [user, authLoading]);
+
+  // Apply theme color
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      if (settings?.themeColor) {
+        document.documentElement.setAttribute("data-theme", settings.themeColor);
+      } else {
+        document.documentElement.setAttribute("data-theme", "peach");
+      }
+    }
+  }, [settings?.themeColor]);
 
   const updateSettings = async (newSettings: CycleSettings) => {
     if (user) {
