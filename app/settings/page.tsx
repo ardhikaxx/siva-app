@@ -5,14 +5,22 @@ import { useCycleData } from "@/context/CycleContext";
 import { useRouter } from "next/navigation";
 import { format, parseISO } from "date-fns";
 import { id } from "date-fns/locale";
-import { LogOut, User, Settings as SettingsIcon, AlertCircle, Trash2 } from "lucide-react";
+import { LogOut, User, Settings as SettingsIcon, AlertCircle, Trash2, Moon, Sun } from "lucide-react";
 import { useAlert } from "@/context/AlertContext";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export default function Settings() {
   const { user, signOut } = useAuth();
   const { settings } = useCycleData();
   const router = useRouter();
   const { confirm } = useAlert();
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleSignOut = async () => {
     confirm({
@@ -74,11 +82,22 @@ export default function Settings() {
               {settings ? format(parseISO(settings.lastPeriodStart), "d MMM yyyy", { locale: id }) : '-'}
             </span>
           </div>
+          <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2">
+            <span className="text-sm text-brand-700 flex items-center"><Moon size={16} className="mr-2" /> Tampilan Gelap (Dark Mode)</span>
+            {mounted && (
+              <button
+                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                className="w-12 h-6 bg-brand-200 rounded-full relative flex items-center px-1"
+              >
+                <div className={`w-4 h-4 rounded-full bg-brand-500 transition-transform ${theme === 'dark' ? 'translate-x-6' : ''}`}></div>
+              </button>
+            )}
+          </div>
           <button 
             onClick={() => router.push("/onboarding?edit=true")}
-            className="w-full text-brand-600 text-sm font-semibold py-2 mt-2 bg-brand-50 rounded-xl hover:bg-brand-100 transition-colors"
+            className="w-full text-brand-600 text-sm font-semibold py-2 mt-4 bg-brand-50 rounded-xl hover:bg-brand-100 transition-colors"
           >
-            Ubah Pengaturan
+            Ubah Pengaturan Siklus
           </button>
         </div>
       </div>
