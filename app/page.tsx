@@ -132,6 +132,21 @@ export default function Home() {
         <Droplet size={20} className="mr-2" /> Tandai Hari Pertama Haid
       </button>
 
+      {/* Pad Inventory Warning */}
+      {info.daysUntilNextPeriod <= 5 && (settings.padInventory === undefined || settings.padInventory < 5) && (
+        <div className="bg-orange-50 border border-orange-200 p-4 rounded-2xl flex items-start mb-6">
+          <div className="bg-orange-100 text-orange-600 p-2 rounded-full mr-3">
+            <Info size={20} />
+          </div>
+          <div>
+            <h4 className="font-semibold text-orange-900 text-sm">Cek Stok Pembalut!</h4>
+            <p className="text-xs text-orange-800 mt-1">
+              Haid Anda sebentar lagi tiba, namun stok pembalut Anda tercatat sisa <span className="font-bold">{settings.padInventory || 0}</span>. Jangan lupa beli persiapan ya!
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Daily Tip Card */}
       {info && (
         <div className="bg-gradient-to-br from-brand-400 to-brand-500 p-5 rounded-3xl shadow-md mb-6 relative overflow-hidden text-white">
