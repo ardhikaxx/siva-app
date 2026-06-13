@@ -24,10 +24,45 @@
   :root {
     --background: #fff0f3;
     --foreground: #4c0411;
+    --card-bg: #ffffff;
+    --card-border: #ffe3e8;
+  }
+
+  .dark {
+    --background: #110103;
+    --foreground: #fff0f3;
+    --card-bg: #220308;
+    --card-border: #4c0411;
+    
+    /* Invert brand colors somewhat for dark mode but keep the vibe */
+    --color-brand-50: #220308;
+    --color-brand-100: #4c0411;
+    --color-brand-200: #881028;
+    --color-brand-300: #a20e2b;
+    --color-brand-400: #c00c2e;
+    --color-brand-500: #e31841;
+    --color-brand-600: #fa3c61;
+    --color-brand-700: #ff6f8c;
+    --color-brand-800: #ffa3b4;
+    --color-brand-900: #ffcdd6;
+    --color-brand-950: #fff0f3;
   }
 }
 
 body {
   color: var(--foreground);
+  background-color: var(--background);
+}
+
+.bg-white {
+  background-color: var(--card-bg);
+}
+.border-brand-100 {
+  border-color: var(--card-border);
+}
+.border-gray-200 {
+  border-color: var(--card-border);
+}
+.bg-gray-50 {
   background-color: var(--background);
 }
