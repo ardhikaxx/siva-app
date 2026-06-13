@@ -25,8 +25,30 @@ export default function Home() {
 
   if (cycleLoading || authLoading || !settings || !info) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-brand-50">
-        <div className="w-10 h-10 border-4 border-brand-300 border-t-brand-500 rounded-full animate-spin"></div>
+      <div className="min-h-screen bg-brand-50 p-6 flex flex-col items-center pb-24">
+        {/* Header Skeleton */}
+        <div className="w-full flex justify-between items-start mb-6 pt-4">
+          <div className="space-y-2">
+            <div className="h-8 w-32 bg-brand-200 rounded animate-pulse"></div>
+            <div className="h-4 w-48 bg-brand-100 rounded animate-pulse"></div>
+          </div>
+          <div className="w-10 h-10 bg-brand-200 rounded-full animate-pulse"></div>
+        </div>
+
+        {/* Cycle Wheel Skeleton */}
+        <div className="relative w-64 h-64 mb-8">
+          <div className="absolute inset-0 rounded-full border-[12px] border-brand-100 animate-pulse"></div>
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div className="h-10 w-16 bg-brand-200 rounded mb-2 animate-pulse"></div>
+            <div className="h-4 w-24 bg-brand-100 rounded animate-pulse"></div>
+          </div>
+        </div>
+
+        {/* Buttons Skeleton */}
+        <div className="w-full mb-4 space-y-4">
+          <div className="h-16 w-full bg-brand-100 rounded-2xl animate-pulse"></div>
+          <div className="h-20 w-full bg-brand-100 rounded-2xl animate-pulse"></div>
+        </div>
       </div>
     );
   }

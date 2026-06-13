@@ -20,8 +20,29 @@ export default function Calendar() {
 
   if (cycleLoading || journalLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-brand-50">
-        <div className="w-8 h-8 border-4 border-brand-300 border-t-brand-500 rounded-full animate-spin"></div>
+      <div className="min-h-screen bg-brand-50 p-6 flex flex-col pb-24">
+        <header className="mb-6 pt-4 flex justify-between items-center">
+          <div className="h-8 w-32 bg-brand-200 rounded animate-pulse"></div>
+          <div className="h-8 w-8 bg-brand-200 rounded-full animate-pulse"></div>
+        </header>
+
+        {/* Calendar Skeleton */}
+        <div className="bg-white p-4 rounded-3xl shadow-sm border border-brand-100 mb-6">
+          <div className="h-6 w-48 bg-brand-100 rounded mb-4 mx-auto animate-pulse"></div>
+          <div className="grid grid-cols-7 gap-1 mb-2">
+            {[...Array(7)].map((_, i) => (
+              <div key={i} className="h-4 w-6 bg-brand-50 rounded mx-auto animate-pulse"></div>
+            ))}
+          </div>
+          <div className="grid grid-cols-7 gap-2">
+            {[...Array(35)].map((_, i) => (
+              <div key={i} className="aspect-square bg-brand-50 rounded-full animate-pulse"></div>
+            ))}
+          </div>
+        </div>
+
+        {/* Detail Skeleton */}
+        <div className="bg-white p-5 rounded-3xl shadow-sm border border-brand-100 h-32 animate-pulse"></div>
       </div>
     );
   }

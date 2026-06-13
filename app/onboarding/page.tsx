@@ -54,7 +54,22 @@ function OnboardingContent() {
   };
 
   if (loading || (settings && !isEditMode)) {
-    return null; // Atau spinner
+    return (
+      <div className="min-h-screen bg-brand-50 p-6 flex flex-col items-center justify-center">
+        <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-sm border border-brand-100">
+          <div className="h-8 w-3/4 bg-brand-200 rounded mb-4 animate-pulse mx-auto"></div>
+          <div className="h-4 w-full bg-brand-100 rounded mb-8 animate-pulse"></div>
+          
+          <div className="space-y-6">
+            <div className="h-16 w-full bg-brand-50 rounded-2xl animate-pulse"></div>
+            <div className="h-16 w-full bg-brand-50 rounded-2xl animate-pulse"></div>
+            <div className="h-16 w-full bg-brand-50 rounded-2xl animate-pulse"></div>
+          </div>
+          
+          <div className="mt-8 h-12 w-full bg-brand-200 rounded-xl animate-pulse"></div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -123,8 +138,19 @@ function OnboardingContent() {
 export default function Onboarding() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center bg-brand-50">
-        <div className="w-8 h-8 border-4 border-brand-300 border-t-brand-500 rounded-full animate-spin"></div>
+      <div className="min-h-screen bg-brand-50 p-6 flex flex-col items-center justify-center">
+        <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-sm border border-brand-100">
+          <div className="h-8 w-3/4 bg-brand-200 rounded mb-4 animate-pulse mx-auto"></div>
+          <div className="h-4 w-full bg-brand-100 rounded mb-8 animate-pulse"></div>
+          
+          <div className="space-y-6">
+            <div className="h-16 w-full bg-brand-50 rounded-2xl animate-pulse"></div>
+            <div className="h-16 w-full bg-brand-50 rounded-2xl animate-pulse"></div>
+            <div className="h-16 w-full bg-brand-50 rounded-2xl animate-pulse"></div>
+          </div>
+          
+          <div className="mt-8 h-12 w-full bg-brand-200 rounded-xl animate-pulse"></div>
+        </div>
       </div>
     }>
       <OnboardingContent />

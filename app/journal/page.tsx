@@ -104,8 +104,23 @@ export default function Journal() {
 
   if (journalLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-brand-50">
-        <div className="w-8 h-8 border-4 border-brand-300 border-t-brand-500 rounded-full animate-spin"></div>
+      <div className="min-h-screen bg-brand-50 p-6 flex flex-col">
+        <header className="mb-4 pt-4">
+          <div className="h-8 w-40 bg-brand-200 rounded animate-pulse"></div>
+        </header>
+
+        {/* Tabs Skeleton */}
+        <div className="flex bg-white rounded-xl p-1 mb-6 shadow-sm">
+          <div className="flex-1 py-4 bg-brand-100 rounded-lg animate-pulse mr-1"></div>
+          <div className="flex-1 py-4 bg-gray-100 rounded-lg animate-pulse"></div>
+        </div>
+
+        {/* Form Skeleton */}
+        <div className="space-y-6">
+          <div className="bg-white p-6 rounded-3xl shadow-sm border border-brand-100 h-32 animate-pulse"></div>
+          <div className="bg-white p-6 rounded-3xl shadow-sm border border-brand-100 h-24 animate-pulse"></div>
+          <div className="bg-white p-6 rounded-3xl shadow-sm border border-brand-100 h-40 animate-pulse"></div>
+        </div>
       </div>
     );
   }
