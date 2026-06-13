@@ -51,7 +51,6 @@
 |---|---|---|
 | **Tamu (Guest)** | Dasbor, kalender, jurnal, prediksi — tanpa login | `localStorage` browser |
 | **Pengguna Terdaftar (User)** | Seluruh fitur Tamu + sinkronisasi multi-perangkat, backup data | Firebase Realtime Database (`users/{uid}`) |
-| **Admin** | Dasbor manajemen konten edukasi, metrik interaksi, konfigurasi platform | Firebase Realtime Database (`admin/`), akses dibatasi via Firebase Auth Custom Claims (`role: admin`) |
 
 ---
 
@@ -156,28 +155,8 @@ users/
         notes: string
         cyclePhaseAtEntry: string
 
-admin/
-  content/
-    {contentId}/
-      title: string
-      category: string         // "edukasi_fase", "tips_nutrisi", "kesehatan_umum"
-      body: string
-      relatedPhase: string      // "menstruasi" | "folikular" | "ovulasi" | "luteal" | "umum"
-      publishedAt: timestamp
-      status: string            // "draft" | "published"
-  analytics/
-    dailyActiveUsers: object
-    totalRegisteredUsers: number
-    journalEntriesCount: object
-  config/
-    appVersion: string
-    maintenanceMode: boolean
-    announcement: string
-```
-
 ### 6.1 Aturan Keamanan (Security Rules — ringkasan)
 - `users/{uid}/*` → hanya dapat dibaca/ditulis oleh pengguna dengan `auth.uid === uid`.
-- `admin/*` → hanya dapat dibaca/ditulis oleh pengguna dengan custom claim `role === "admin"`.
 - Validasi tipe data pada `cycleSettings` (misalnya `cycleLength` harus berupa angka antara 21–35).
 
 ---
@@ -225,24 +204,7 @@ admin/
 - Untuk pengguna terdaftar: ubah email/password, ekspor data (JSON), hapus akun
 - Untuk pengguna tamu: opsi "Buat Akun" / "Masuk"
 
----
 
-## 8. Dasbor Admin (`/admin`)
-
-### 8.1 Akses
-- Login terpisah menggunakan Firebase Auth dengan custom claim `role: admin`.
-- Middleware Next.js memeriksa claim sebelum mengizinkan akses ke rute `/admin/*`.
-
-### 8.2 Modul
-
-| Modul | Fungsi |
-|---|---|
-| **Manajemen Konten Edukasi** | CRUD artikel/tips (judul, kategori, isi, fase terkait, status publikasi) |
-| **Metrik Interaksi** | Dasbor ringkas: jumlah pengguna terdaftar, pengguna aktif harian/bulanan, jumlah entri jurnal, fase yang paling sering diakses |
-| **Konfigurasi Platform** | Mode maintenance, pengumuman global, versi aplikasi |
-| **Manajemen Pengguna (opsional fase lanjutan)** | Daftar pengguna terdaftar, status akun |
-
----
 
 ## 9. Autentikasi & Privasi Data
 
@@ -280,10 +242,6 @@ admin/
 /settings             → Pengaturan profil & siklus
 /login                → Halaman masuk
 /register             → Halaman daftar
-/admin                → Dasbor admin (dilindungi middleware)
-/admin/content        → Manajemen konten edukasi
-/admin/analytics      → Metrik interaksi
-/admin/config         → Konfigurasi platform
 ```
 
 ---
@@ -307,10 +265,9 @@ admin/
 5. Implementasi Jurnal Harian & riwayat
 6. Integrasi Firebase Authentication (Login/Register) & migrasi data Tamu → Terdaftar
 7. Integrasi Firebase Realtime Database untuk sinkronisasi data
-8. Implementasi Rekomendasi Gaya Hidup (terhubung ke konten admin)
-9. Pembangunan Dasbor Admin (konten, analitik, konfigurasi)
-10. Pengujian responsivitas, PWA installability, dan aksesibilitas
-11. Deployment ke Vercel & konfigurasi domain `.web.id`
+8. Implementasi Rekomendasi Gaya Hidup (Insights)
+9. Pengujian responsivitas, PWA installability, dan aksesibilitas
+10. Deployment ke Vercel & konfigurasi domain `.web.id`
 
 ---
 
