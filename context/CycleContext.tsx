@@ -93,10 +93,16 @@ export const CycleProvider = ({ children }: { children: React.ReactNode }) => {
   const markPeriodStart = async (startDate: string) => {
     if (!settings) return;
     
-    // In a real app we'd save to cycles history here
+    const pastPeriods = settings.pastPeriods || [];
+    // Only push if not already marked for this date
+    if (!pastPeriods.includes(startDate)) {
+      pastPeriods.push(startDate);
+    }
+    
     const newSettings = {
       ...settings,
       lastPeriodStart: startDate,
+      pastPeriods: pastPeriods,
     };
     await updateSettings(newSettings);
   };
