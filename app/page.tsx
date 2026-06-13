@@ -89,7 +89,14 @@ export default function Home() {
             <h3 className="font-semibold text-sm">Haid Berikutnya</h3>
           </div>
           <p className="text-2xl font-bold text-brand-900 mb-1">{info.daysUntilNextPeriod} <span className="text-sm font-normal">hari lagi</span></p>
-          <p className="text-xs text-brand-500">{format(parseISO(info.nextPeriodDate), "d MMM yyyy", { locale: id })}</p>
+          <div className="flex items-center justify-between">
+            <p className="text-xs text-brand-500">{format(parseISO(info.nextPeriodDate), "d MMM yyyy", { locale: id })}</p>
+            {info.isSmartPrediction && (
+              <span className="text-[10px] bg-brand-100 text-brand-600 px-1.5 py-0.5 rounded animate-pulse">
+                Pintar 🧠
+              </span>
+            )}
+          </div>
         </div>
 
         <div className="bg-white p-5 rounded-3xl shadow-sm border border-brand-100">
@@ -124,6 +131,28 @@ export default function Home() {
       >
         <Droplet size={20} className="mr-2" /> Tandai Hari Pertama Haid
       </button>
+
+      {/* Daily Tip Card */}
+      {info && (
+        <div className="bg-gradient-to-br from-brand-400 to-brand-500 p-5 rounded-3xl shadow-md mb-6 relative overflow-hidden text-white">
+          <div className="absolute -right-4 -top-4 w-20 h-20 bg-white rounded-full opacity-10"></div>
+          <div className="absolute -left-4 -bottom-4 w-16 h-16 bg-white rounded-full opacity-10"></div>
+          <h3 className="text-sm font-bold mb-2 flex items-center relative z-10">
+            <span className="text-xl mr-2">
+              {info.currentPhase === 'menstruasi' ? '💧' : 
+               info.currentPhase === 'folikular' ? '✨' : 
+               info.currentPhase === 'ovulasi' ? '🌸' : '🌿'}
+            </span>
+            Tips Pintar Hari Ini
+          </h3>
+          <p className="text-sm leading-relaxed relative z-10 opacity-90">
+            {info.currentPhase === 'menstruasi' && "Istirahat yang cukup sangat penting. Jangan lupa perbanyak minum air hangat dan konsumsi makanan kaya zat besi seperti bayam atau daging merah."}
+            {info.currentPhase === 'folikular' && "Energi kamu sedang memuncak! Hormon estrogen sedang naik. Ini waktu yang tepat untuk melakukan olahraga kardio ringan atau mencoba hal baru."}
+            {info.currentPhase === 'ovulasi' && "Kamu sedang berada di puncak masa subur dan merasa sangat percaya diri! Nikmati energi positif ini untuk bersosialisasi atau proyek penting."}
+            {info.currentPhase === 'luteal' && "Wajar jika merasa sedikit sensitif, lelah, atau craving makanan manis. Luangkan waktu untuk relaksasi. Kurangi kafein jika perut kembung."}
+          </p>
+        </div>
+      )}
 
       {!user && (
         <div className="bg-blue-50 p-4 rounded-2xl border border-blue-100 flex items-start">
