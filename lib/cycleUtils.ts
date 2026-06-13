@@ -1,4 +1,4 @@
-import { addDays, differenceInDays, isBefore, startOfDay, parseISO, formatISO } from "date-fns";
+import { addDays, differenceInDays, isBefore, startOfDay, parseISO, formatISO, subDays } from "date-fns";
 
 export type Phase = "menstruasi" | "folikular" | "ovulasi" | "luteal";
 
@@ -121,7 +121,10 @@ export interface HealthAlert {
   severity: "warning" | "danger" | "info";
 }
 
-export const analyzeHealth = (settings: CycleSettings | null, entries: Record<string, any>): HealthAlert[] => {
+export const analyzeHealth = (
+  settings: CycleSettings | null, 
+  entries: Record<string, { symptoms?: string[], energyLevel?: number }>
+): HealthAlert[] => {
   if (!settings) return [];
   
   const alerts: HealthAlert[] = [];
@@ -195,9 +198,10 @@ export const analyzeHealth = (settings: CycleSettings | null, entries: Record<st
   Object.entries(entries).forEach(([dateStr, entry]) => {
     if (isBefore(thirtyDaysAgo, parseISO(dateStr))) {
       // Check for extreme pain/cramps and low energy
+      const energy = entry.energyLevel ?? 3;
       const isSevere = 
-        (entry.symptoms?.includes("kram") && entry.energyLevel <= 2) ||
-        (entry.symptoms?.includes("sakit_kepala") && entry.energyLevel <= 2);
+        (entry.symptoms?.includes("kram") && energy <= 2) ||
+        (entry.symptoms?.includes("sakit_kepala") && energy <= 2);
         
       if (isSevere) severeCrampsCount++;
     }
