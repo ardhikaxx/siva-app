@@ -13,6 +13,10 @@ const availableSymptoms = [
   "Payudara Sensitif", "Mual", "Jerawat", "Kelelahan"
 ];
 
+const availableMedications = [
+  "Pereda Nyeri", "Suplemen Zat Besi", "Pil KB", "Vitamin", "Obat Lain"
+];
+
 const moods = ["Senang", "Tenang", "Biasa", "Cemas", "Sedih", "Mudah Tersinggung"];
 
 export default function Journal() {
@@ -27,6 +31,7 @@ export default function Journal() {
   const [mood, setMood] = useState("");
   const [energy, setEnergy] = useState(3);
   const [symptoms, setSymptoms] = useState<string[]>([]);
+  const [medications, setMedications] = useState<string[]>([]);
   const [notes, setNotes] = useState("");
   const [isSaved, setIsSaved] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -39,6 +44,7 @@ export default function Journal() {
           setMood(todayEntry.mood || "");
           setEnergy(todayEntry.energyLevel || 3);
           setSymptoms(todayEntry.symptoms || []);
+          setMedications(todayEntry.medications || []);
           setNotes(todayEntry.notes || "");
         }, 0);
       }
@@ -53,6 +59,14 @@ export default function Journal() {
     );
   };
 
+  const toggleMedication = (medication: string) => {
+    setMedications(prev => 
+      prev.includes(medication) 
+        ? prev.filter(m => m !== medication)
+        : [...prev, medication]
+    );
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
@@ -61,6 +75,7 @@ export default function Journal() {
         mood,
         energyLevel: energy,
         symptoms,
+        medications,
         notes,
         cyclePhaseAtEntry: info?.currentPhase || "unknown"
       });
@@ -171,6 +186,22 @@ export default function Journal() {
             ></textarea>
           </div>
 
+          <div className="bg-white p-6 rounded-3xl shadow-sm border border-brand-100">
+            <h2 className="text-sm font-semibold text-brand-900 mb-4">Obat & Suplemen</h2>
+            <div className="flex flex-wrap gap-2">
+              {availableMedications.map(med => (
+                <button
+                  key={med}
+                  type="button"
+                  onClick={() => toggleMedication(med)}
+                  className={`py-1.5 px-3 rounded-lg text-xs font-medium transition-colors ${medications.includes(med) ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+                >
+                  {med}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <button 
             type="submit"
             disabled={isSaving}
@@ -215,9 +246,19 @@ export default function Journal() {
 
                 {entry.symptoms && entry.symptoms.length > 0 && (
                   <div className="flex flex-wrap gap-1 mb-3">
-                    {entry.symptoms.map(s => (
+                    {entry.symptoms.map((s: string) => (
                       <span key={s} className="bg-purple-50 text-purple-700 text-[10px] px-2 py-0.5 rounded border border-purple-100">
                         {s}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                
+                {entry.medications && entry.medications.length > 0 && (
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    {entry.medications.map((m: string) => (
+                      <span key={m} className="bg-blue-50 text-blue-700 text-[10px] px-2 py-0.5 rounded border border-blue-100">
+                        💊 {m}
                       </span>
                     ))}
                   </div>
