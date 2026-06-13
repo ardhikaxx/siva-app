@@ -122,14 +122,14 @@ export default function Community() {
         )}
       </div>
 
-      <div className="fixed bottom-0 w-full bg-white border-t border-brand-100 p-4 pb-safe shadow-[0_-10px_20px_rgba(0,0,0,0.05)]">
-        <form onSubmit={handleSubmit} className="flex gap-2 relative">
+      <div className="fixed bottom-0 left-0 right-0 w-full bg-white border-t border-brand-100 p-4 pb-8 shadow-[0_-10px_20px_rgba(0,0,0,0.05)] z-[100]">
+        <form onSubmit={handleSubmit} className="flex gap-2 relative max-w-lg mx-auto">
           <input 
             type="text" 
             value={newPostText}
             onChange={(e) => setNewPostText(e.target.value)}
             placeholder="Bagikan keluhan atau pengalamanmu..."
-            className="flex-1 bg-brand-50 border border-brand-100 rounded-full pl-5 pr-12 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400"
+            className="flex-1 bg-brand-50 border border-brand-100 rounded-full pl-5 pr-12 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 text-brand-900"
           />
           <button 
             type="submit" 
