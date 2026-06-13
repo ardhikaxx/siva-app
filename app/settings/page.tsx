@@ -12,15 +12,24 @@ import { useEffect, useState } from "react";
 
 export default function Settings() {
   const { user, signOut } = useAuth();
-  const { settings } = useCycleData();
+  const { settings, updateSettings } = useCycleData();
   const router = useRouter();
   const { confirm } = useAlert();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     setTimeout(() => setMounted(true), 0);
   }, []);
+
+  const updatePadInventory = async (change: number) => {
+    if (!settings) return;
+    const currentInventory = settings.padInventory || 0;
+    const newInventory = Math.max(0, currentInventory + change);
+    await updateSettings({ ...settings, padInventory: newInventory });
+  };
+
 
   const handleSignOut = async () => {
     confirm({
@@ -53,8 +62,17 @@ export default function Settings() {
       </header>
 
       <div className="bg-white p-6 rounded-3xl shadow-sm border border-brand-100 mb-6 flex items-center">
-        <div className="w-16 h-16 bg-brand-100 text-brand-500 rounded-full flex justify-center items-center mr-4">
-          <User size={32} />
+        <div className="w-16 h-16 bg-brand-100 text-brand-500 rounded-full flex justify-center items-center mr-4 overflow-hidden">
+          {user?.photoURL && !imgError ? (
+            <img 
+              src={user.photoURL} 
+              alt="Foto Profil" 
+              className="w-full h-full object-cover" 
+              onError={() => setImgError(true)} 
+            />
+          ) : (
+            <User size={32} />
+          )}
         </div>
         <div>
           <h2 className="font-bold text-brand-900 text-lg">{user ? user.displayName || 'Pengguna' : 'Tamu'}</h2>
@@ -82,6 +100,22 @@ export default function Settings() {
               {settings ? format(parseISO(settings.lastPeriodStart), "d MMM yyyy", { locale: id }) : '-'}
             </span>
           </div>
+          
+          <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2">
+            <span className="text-sm text-brand-700">Sisa Stok Pembalut</span>
+            <div className="flex items-center space-x-3">
+              <button 
+                onClick={() => updatePadInventory(-1)}
+                className="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center font-bold"
+              >-</button>
+              <span className="font-bold text-brand-900 w-4 text-center">{settings?.padInventory || 0}</span>
+              <button 
+                onClick={() => updatePadInventory(1)}
+                className="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center font-bold"
+              >+</button>
+            </div>
+          </div>
+
           <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2">
             <span className="text-sm text-brand-700 flex items-center"><Moon size={16} className="mr-2" /> Tampilan Gelap (Dark Mode)</span>
             {mounted && (
