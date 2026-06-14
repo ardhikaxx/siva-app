@@ -10,6 +10,7 @@ export interface CycleSettings {
   isSmartPrediction?: boolean; // Flag if we are using calculated average
   padInventory?: number; // Stock of sanitary pads
   themeColor?: "peach" | "matcha" | "ocean" | "cyberpunk" | "lavender";
+  pillReminderTime?: string; // Format: "HH:mm"
 }
 
 export interface CycleInfo {

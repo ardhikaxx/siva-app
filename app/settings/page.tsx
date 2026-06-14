@@ -172,6 +172,21 @@ export default function Settings() {
               </button>
             )}
           </div>
+
+          {permission === 'granted' && (
+            <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2">
+              <div>
+                <span className="text-sm text-brand-700 block font-medium">Jadwal Minum Pil/Vitamin</span>
+                <span className="text-xs text-brand-400">Pilih jam untuk menerima pengingat harian</span>
+              </div>
+              <input 
+                type="time" 
+                value={settings?.pillReminderTime || ""}
+                onChange={(e) => updateSettings({ ...settings!, pillReminderTime: e.target.value })}
+                className="bg-brand-50 border border-brand-200 text-brand-900 text-sm rounded-lg focus:ring-brand-500 focus:border-brand-500 block p-2"
+              />
+            </div>
+          )}
           
           <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2">
             <div>

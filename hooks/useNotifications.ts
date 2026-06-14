@@ -33,8 +33,7 @@ export function useNotifications() {
     if (permission === "granted") {
       new Notification("SIVA: Pengingat Minum Air 💧", {
         body: "Jangan lupa untuk minum air agar tetap terhidrasi hari ini!",
-        icon: "/icons/icon-192x192.png", // Assuming PWA icon exists
-        badge: "/icons/icon-192x192.png"
+        icon: "/window.svg"
       });
     } else {
       requestPermission().then(granted => {
@@ -42,6 +41,30 @@ export function useNotifications() {
       });
     }
   };
+
+  useEffect(() => {
+    if (permission !== "granted" || !settings?.pillReminderTime) return;
+
+    const interval = setInterval(() => {
+      const now = new Date();
+      const currentHourStr = now.getHours().toString().padStart(2, '0');
+      const currentMinStr = now.getMinutes().toString().padStart(2, '0');
+      const currentTime = `${currentHourStr}:${currentMinStr}`;
+      
+      const lastNotifiedDate = localStorage.getItem("siva_last_pill_notification_date");
+      const todayStr = now.toDateString();
+
+      if (currentTime === settings.pillReminderTime && lastNotifiedDate !== todayStr) {
+        new Notification("SIVA: Waktunya Pil KB & Vitamin! 💊", {
+          body: "Halo! Ini adalah pengingat harian Anda untuk meminum pil KB atau suplemen vitamin.",
+          icon: "/window.svg"
+        });
+        localStorage.setItem("siva_last_pill_notification_date", todayStr);
+      }
+    }, 30000); // Cek setiap 30 detik
+
+    return () => clearInterval(interval);
+  }, [permission, settings?.pillReminderTime]);
 
   return {
     permission,
