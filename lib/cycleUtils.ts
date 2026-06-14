@@ -140,7 +140,7 @@ export interface HealthAlert {
 
 export const analyzeHealth = (
   settings: CycleSettings | null, 
-  entries: Record<string, { symptoms?: string[], energyLevel?: number }>
+  entries: Record<string, { symptoms?: string[], energyLevel?: number, cyclePhaseAtEntry?: string, mood?: string }>
 ): HealthAlert[] => {
   if (!settings) return [];
   
