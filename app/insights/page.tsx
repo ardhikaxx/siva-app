@@ -6,7 +6,7 @@ import { PieChart as PieChartIcon, Activity, TrendingUp, CalendarDays, AlertTria
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Legend } from "recharts";
 import { format, parseISO, subDays } from "date-fns";
 import { id } from "date-fns/locale";
-import { analyzeHealth } from "@/lib/cycleUtils";
+import { analyzeHealth, analyzeCorrelations } from "@/lib/cycleUtils";
 import { motion } from "framer-motion";
 
 export default function Insights() {
@@ -141,6 +141,48 @@ export default function Insights() {
             ))}
           </div>
         )}
+
+        {/* Advanced Correlations */}
+        {(() => {
+          const correlations = analyzeCorrelations(entries);
+          if (correlations.length > 0) {
+            return (
+              <div className="mb-8 space-y-3">
+                <h2 className="text-sm font-bold text-brand-900 mb-2 px-1">✨ Korelasi Cerdas SIVA</h2>
+                {correlations.map(insight => (
+                  <motion.div 
+                    variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } }}
+                    key={insight.id} 
+                    className={`p-4 rounded-2xl border ${
+                      insight.type === 'positive' ? 'bg-green-50 border-green-200' :
+                      insight.type === 'negative' ? 'bg-orange-50 border-orange-200' :
+                      'bg-blue-50 border-blue-200'
+                    } flex items-start shadow-sm`}
+                  >
+                    <div className="mr-3 mt-0.5">
+                      {insight.type === 'positive' && <Smile size={20} className="text-green-500" />}
+                      {insight.type === 'negative' && <AlertTriangle size={20} className="text-orange-500" />}
+                      {insight.type === 'info' && <InfoIcon size={20} className="text-blue-500" />}
+                    </div>
+                    <div>
+                      <h3 className={`text-sm font-bold ${
+                        insight.type === 'positive' ? 'text-green-900' :
+                        insight.type === 'negative' ? 'text-orange-900' :
+                        'text-blue-900'
+                      }`}>{insight.title}</h3>
+                      <p className={`text-xs mt-1 leading-relaxed ${
+                        insight.type === 'positive' ? 'text-green-800' :
+                        insight.type === 'negative' ? 'text-orange-800' :
+                        'text-blue-800'
+                      }`}>{insight.message}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            );
+          }
+          return null;
+        })()}
 
         {/* Overview Cards */}
         <div className="grid grid-cols-2 gap-4 mb-8">

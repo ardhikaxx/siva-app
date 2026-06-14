@@ -253,3 +253,83 @@ export const analyzeHealth = (
 
   return alerts;
 };
+
+export interface CorrelationInsight {
+  id: string;
+  title: string;
+  message: string;
+  type: "positive" | "negative" | "info";
+}
+
+export const analyzeCorrelations = (
+  entries: Record<string, { symptoms?: string[], sleepHours?: number, waterGlasses?: number, painLevel?: number, energyLevel?: number, weight?: number }>
+): CorrelationInsight[] => {
+  const insights: CorrelationInsight[] = [];
+  const entriesList = Object.values(entries);
+  if (entriesList.length < 5) return insights;
+
+  // Sleep vs Pain correlation
+  let highSleepLowPain = 0;
+  let lowSleepHighPain = 0;
+  let sleepPainCount = 0;
+
+  // Water vs Bloating/Headache
+  let highWaterLowSymptoms = 0;
+  let lowWaterHighSymptoms = 0;
+  let waterSymptomCount = 0;
+
+  entriesList.forEach(entry => {
+    // Sleep vs Pain
+    if (entry.sleepHours !== undefined && entry.painLevel !== undefined) {
+      sleepPainCount++;
+      if (entry.sleepHours >= 7 && entry.painLevel <= 3) highSleepLowPain++;
+      if (entry.sleepHours < 6 && entry.painLevel >= 5) lowSleepHighPain++;
+    }
+
+    // Water vs Bloating/Headache
+    if (entry.waterGlasses !== undefined && entry.symptoms) {
+      const hasHeadacheOrBloat = entry.symptoms.some(s => s.toLowerCase().includes("kembung") || s.toLowerCase().includes("sakit kepala"));
+      if (entry.waterGlasses >= 7 && !hasHeadacheOrBloat) highWaterLowSymptoms++;
+      if (entry.waterGlasses < 4 && hasHeadacheOrBloat) lowWaterHighSymptoms++;
+      waterSymptomCount++;
+    }
+  });
+
+  if (sleepPainCount >= 3) {
+    if (highSleepLowPain >= 2) {
+      insights.push({
+        id: "sleep_pain_pos",
+        title: "Tidur Cukup = Bebas Nyeri",
+        message: "Kami menemukan pola: Setiap kali Anda tidur lebih dari 7 jam, intensitas nyeri Anda cenderung sangat rendah. Pertahankan kebiasaan tidur ini!",
+        type: "positive"
+      });
+    } else if (lowSleepHighPain >= 2) {
+      insights.push({
+        id: "sleep_pain_neg",
+        title: "Kurang Tidur Memicu Nyeri",
+        message: "Terlihat pola bahwa tidur kurang dari 6 jam berkorelasi dengan meningkatnya rasa nyeri/kram. Cobalah tidur lebih awal saat siklus menstruasi tiba.",
+        type: "negative"
+      });
+    }
+  }
+
+  if (waterSymptomCount >= 3) {
+    if (highWaterLowSymptoms >= 2) {
+      insights.push({
+        id: "water_symp_pos",
+        title: "Hidrasi Mengurangi Kembung",
+        message: "Hebat! Rutin minum air (≥7 gelas) terbukti meminimalisir gejala kembung dan sakit kepala Anda.",
+        type: "positive"
+      });
+    } else if (lowWaterHighSymptoms >= 2) {
+      insights.push({
+        id: "water_symp_neg",
+        title: "Dehidrasi & Kembung",
+        message: "Saat Anda minum kurang dari 4 gelas air, gejala kembung atau sakit kepala sering muncul. Jangan lupa perbanyak minum air putih!",
+        type: "negative"
+      });
+    }
+  }
+
+  return insights;
+};
