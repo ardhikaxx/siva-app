@@ -3,17 +3,20 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, CalendarDays, BookOpen, Settings, PieChart, BookText } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function BottomNav() {
   const pathname = usePathname();
+  const { t } = useLanguage();
+
   if (pathname === "/onboarding" || pathname === "/login" || pathname === "/register") return null;
 
   const links = [
-    { href: "/", label: "Beranda", icon: Home },
-    { href: "/calendar", label: "Kalender", icon: CalendarDays },
-    { href: "/journal", label: "Jurnal", icon: BookOpen },
-    { href: "/insights", label: "Analitik", icon: PieChart },
-    { href: "/education", label: "Edukasi", icon: BookText },
+    { href: "/", label: t('nav_home'), icon: Home },
+    { href: "/calendar", label: t('nav_calendar'), icon: CalendarDays },
+    { href: "/journal", label: t('nav_journal'), icon: BookOpen },
+    { href: "/insights", label: t('nav_insights'), icon: PieChart },
+    { href: "/education", label: t('nav_education'), icon: BookText },
   ];
 
   return (

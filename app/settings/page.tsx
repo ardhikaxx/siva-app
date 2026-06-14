@@ -17,6 +17,7 @@ export default function Settings() {
   const router = useRouter();
   const { confirm, showAlert } = useAlert();
   const { theme, setTheme } = useTheme();
+  const { t, language, setLanguage } = useLanguage();
   const [mounted, setMounted] = useState(false);
   const [imgError, setImgError] = useState(false);
   const { permission, requestPermission, sendTestNotification } = useNotifications();
@@ -31,7 +32,6 @@ export default function Settings() {
     const newInventory = Math.max(0, currentInventory + change);
     await updateSettings({ ...settings, padInventory: newInventory });
   };
-
 
   const handleSignOut = async () => {
     confirm({
@@ -58,9 +58,9 @@ export default function Settings() {
   };
 
   return (
-    <div className="min-h-screen bg-brand-50 p-6">
+    <div className="min-h-screen bg-brand-50 p-6 pb-24">
       <header className="mb-8 pt-4">
-        <h1 className="text-2xl font-bold text-brand-900">Profil & Pengaturan</h1>
+        <h1 className="text-2xl font-bold text-brand-900">{t('settings_title')}</h1>
       </header>
 
       <div className="bg-white p-6 rounded-3xl shadow-sm border border-brand-100 mb-6 flex items-center">
@@ -85,26 +85,26 @@ export default function Settings() {
       <div className="bg-white rounded-3xl shadow-sm border border-brand-100 overflow-hidden mb-6">
         <div className="p-4 border-b border-brand-50 flex items-center">
           <SettingsIcon size={20} className="text-brand-500 mr-3" />
-          <h3 className="font-semibold text-brand-900">Pengaturan Siklus</h3>
+          <h3 className="font-semibold text-brand-900">{t('settings_cycle_settings')}</h3>
         </div>
         <div className="p-4 space-y-4">
           <div className="flex justify-between items-center">
-            <span className="text-sm text-brand-700">Durasi Siklus</span>
+            <span className="text-sm text-brand-700">{t('settings_cycle_length')}</span>
             <span className="font-medium bg-brand-50 px-3 py-1 rounded-lg text-brand-900">{settings?.cycleLength || '-'} hari</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-sm text-brand-700">Durasi Menstruasi</span>
+            <span className="text-sm text-brand-700">{t('settings_period_length')}</span>
             <span className="font-medium bg-brand-50 px-3 py-1 rounded-lg text-brand-900">{settings?.periodLength || '-'} hari</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-sm text-brand-700">Haid Terakhir</span>
+            <span className="text-sm text-brand-700">{t('settings_last_period')}</span>
             <span className="font-medium bg-brand-50 px-3 py-1 rounded-lg text-brand-900">
               {settings ? format(parseISO(settings.lastPeriodStart), "d MMM yyyy", { locale: id }) : '-'}
             </span>
           </div>
           
           <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2">
-            <span className="text-sm text-brand-700">Sisa Stok Pembalut</span>
+            <span className="text-sm text-brand-700">{t('settings_pad_inventory')}</span>
             <div className="flex items-center space-x-3">
               <button 
                 onClick={() => updatePadInventory(-1)}
@@ -119,7 +119,7 @@ export default function Settings() {
           </div>
 
           <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2">
-            <span className="text-sm text-brand-700">Tema Warna</span>
+            <span className="text-sm text-brand-700">{t('settings_theme')}</span>
             <div className="flex gap-2">
               <button onClick={() => updateSettings({ ...settings!, themeColor: "peach" })} className={`w-6 h-6 rounded-full bg-[#fa3c61] ${(!settings?.themeColor || settings.themeColor === 'peach') ? 'ring-2 ring-offset-2 ring-brand-500' : ''}`} />
               <button onClick={() => updateSettings({ ...settings!, themeColor: "matcha" })} className={`w-6 h-6 rounded-full bg-[#22c55e] ${settings?.themeColor === 'matcha' ? 'ring-2 ring-offset-2 ring-green-500' : ''}`} />
@@ -130,7 +130,7 @@ export default function Settings() {
           </div>
 
           <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2">
-            <span className="text-sm text-brand-700 flex items-center"><Moon size={16} className="mr-2" /> Tampilan Gelap</span>
+            <span className="text-sm text-brand-700 flex items-center"><Moon size={16} className="mr-2" /> {t('settings_dark_mode')}</span>
             {mounted && (
               <button
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
@@ -140,11 +140,30 @@ export default function Settings() {
               </button>
             )}
           </div>
+
+          <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2">
+            <span className="text-sm text-brand-700 flex items-center">🌐 {t('settings_language')}</span>
+            <div className="flex bg-brand-50 rounded-lg p-1">
+              <button 
+                onClick={() => setLanguage('id')}
+                className={`px-3 py-1 text-xs font-semibold rounded-md transition-colors ${language === 'id' ? 'bg-white text-brand-700 shadow-sm' : 'text-brand-400'}`}
+              >
+                ID
+              </button>
+              <button 
+                onClick={() => setLanguage('en')}
+                className={`px-3 py-1 text-xs font-semibold rounded-md transition-colors ${language === 'en' ? 'bg-white text-brand-700 shadow-sm' : 'text-brand-400'}`}
+              >
+                EN
+              </button>
+            </div>
+          </div>
+
           <button 
             onClick={() => router.push("/onboarding?edit=true")}
             className="w-full text-brand-600 text-sm font-semibold py-2 mt-4 bg-brand-50 rounded-xl hover:bg-brand-100 transition-colors"
           >
-            Ubah Pengaturan Siklus
+            {t('settings_change_cycle')}
           </button>
         </div>
       </div>
@@ -152,7 +171,7 @@ export default function Settings() {
       <div className="bg-white rounded-3xl shadow-sm border border-brand-100 overflow-hidden mb-6">
         <div className="p-4 border-b border-brand-50 flex items-center">
           <AlertCircle size={20} className="text-brand-500 mr-3" />
-          <h3 className="font-semibold text-brand-900">Notifikasi & Pengingat</h3>
+          <h3 className="font-semibold text-brand-900">{t('settings_notifications')}</h3>
         </div>
         <div className="p-4 space-y-4">
           <div className="flex justify-between items-center">
@@ -176,7 +195,7 @@ export default function Settings() {
           {permission === 'granted' && (
             <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2">
               <div>
-                <span className="text-sm text-brand-700 block font-medium">Jadwal Minum Pil/Vitamin</span>
+                <span className="text-sm text-brand-700 block font-medium">{t('settings_pill_reminder')}</span>
                 <span className="text-xs text-brand-400">Pilih jam untuk menerima pengingat harian</span>
               </div>
               <input 
@@ -187,18 +206,6 @@ export default function Settings() {
               />
             </div>
           )}
-          
-          <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2">
-            <div>
-              <span className="text-sm text-brand-700 block">Pengingat Harian (Test)</span>
-            </div>
-            <button
-              onClick={sendTestNotification}
-              className="w-12 h-6 bg-brand-200 rounded-full relative flex items-center px-1"
-            >
-              <div className={`w-4 h-4 rounded-full bg-brand-500 transition-transform ${permission === 'granted' ? 'translate-x-6' : ''}`}></div>
-            </button>
-          </div>
         </div>
       </div>
 
@@ -219,7 +226,7 @@ export default function Settings() {
           onClick={handleSignOut}
           className="w-full bg-white text-red-500 font-semibold py-4 rounded-2xl flex justify-center items-center shadow-sm border border-red-100 mb-4"
         >
-          <LogOut size={20} className="mr-2" /> Keluar dari Akun
+          <LogOut size={20} className="mr-2" /> {t('settings_logout')}
         </button>
       )}
 
@@ -228,7 +235,7 @@ export default function Settings() {
          onClick={handleResetData}
          className="w-full bg-red-50 text-red-600 font-semibold py-4 rounded-2xl flex justify-center items-center shadow-sm hover:bg-red-100 transition-colors"
        >
-         <Trash2 size={20} className="mr-2" /> Hapus Data Lokal
+         <Trash2 size={20} className="mr-2" /> {t('settings_delete_data')}
        </button>
       )}
     </div>
