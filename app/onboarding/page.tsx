@@ -93,7 +93,7 @@ function OnboardingContent() {
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.5, type: "spring", bounce: 0.4 }}
-        className="w-full max-w-md bg-white/80 backdrop-blur-xl p-8 rounded-[2.5rem] shadow-2xl border border-white/50 relative z-10"
+        className="w-full max-w-md bg-brand-50/90 backdrop-blur-xl p-8 rounded-[2.5rem] shadow-2xl border border-brand-200/50 relative z-10"
       >
         <div className="text-center mb-8">
           <motion.div 
@@ -102,12 +102,12 @@ function OnboardingContent() {
             transition={{ delay: 0.2, type: "spring" }}
             className="w-16 h-16 bg-gradient-to-tr from-brand-400 to-brand-600 rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-lg transform rotate-3"
           >
-            <Flower2 className="text-white" size={32} />
+            <Flower2 className="text-brand-50" size={32} />
           </motion.div>
           <h1 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-800 mb-2 tracking-tight">
             Selamat Datang di SIVA
           </h1>
-          <p className="text-brand-600 text-sm font-medium">
+          <p className="text-brand-700 text-sm font-medium">
             {isEditMode ? "Perbarui informasi siklus Anda" : "Mari kita sesuaikan SIVA dengan ritme alami tubuhmu."}
           </p>
         </div>
@@ -121,7 +121,7 @@ function OnboardingContent() {
               className="bg-white rounded-2xl p-4 border border-brand-100 shadow-sm focus-within:ring-2 focus-within:ring-brand-400 transition-all"
             >
               <label className="flex items-center text-sm font-bold text-brand-900 mb-3">
-                <div className="w-8 h-8 rounded-full bg-brand-50 flex items-center justify-center mr-3 text-brand-500">
+                <div className="w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center mr-3 text-brand-600">
                   <CalendarDays size={16} />
                 </div>
                 Kapan hari pertama haid terakhirmu?
@@ -130,7 +130,7 @@ function OnboardingContent() {
                 type="date" 
                 value={lastPeriodStart}
                 onChange={(e) => setLastPeriodStart(e.target.value)}
-                className="w-full bg-brand-50/50 p-3.5 rounded-xl border-none focus:ring-0 text-brand-900 font-medium outline-none cursor-pointer"
+                className="w-full bg-brand-50 p-3.5 rounded-xl border border-transparent focus:border-brand-300 focus:ring-0 text-brand-900 font-medium outline-none cursor-pointer"
                 required
               />
             </motion.div>
@@ -145,7 +145,7 @@ function OnboardingContent() {
                 >
                   <div className="bg-white rounded-2xl p-4 border border-brand-100 shadow-sm focus-within:ring-2 focus-within:ring-brand-400 transition-all">
                     <label className="flex items-center text-sm font-bold text-brand-900 mb-3">
-                      <div className="w-8 h-8 rounded-full bg-brand-50 flex items-center justify-center mr-3 text-brand-500">
+                      <div className="w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center mr-3 text-brand-600">
                         <Activity size={16} />
                       </div>
                       Berapa lama rata-rata siklusmu?
@@ -157,16 +157,16 @@ function OnboardingContent() {
                         max="60"
                         value={cycleLength}
                         onChange={(e) => setCycleLength(e.target.value ? parseInt(e.target.value) : "")}
-                        className="w-20 text-center bg-brand-50/50 p-3 rounded-xl border-none focus:ring-0 text-brand-900 font-black text-lg outline-none"
+                        className="w-20 text-center bg-brand-50 p-3 rounded-xl border border-transparent focus:border-brand-300 focus:ring-0 text-brand-900 font-black text-lg outline-none"
                         required
                       />
-                      <span className="ml-3 text-brand-500 font-medium text-sm">Hari (Biasanya 28 hari)</span>
+                      <span className="ml-3 text-brand-600 font-medium text-sm">Hari (Biasanya 28 hari)</span>
                     </div>
                   </div>
 
                   <div className="bg-white rounded-2xl p-4 border border-brand-100 shadow-sm focus-within:ring-2 focus-within:ring-brand-400 transition-all">
                     <label className="flex items-center text-sm font-bold text-brand-900 mb-3">
-                      <div className="w-8 h-8 rounded-full bg-brand-50 flex items-center justify-center mr-3 text-brand-500">
+                      <div className="w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center mr-3 text-brand-600">
                         <Clock size={16} />
                       </div>
                       Berapa hari haidmu biasanya?
@@ -178,10 +178,10 @@ function OnboardingContent() {
                         max="15"
                         value={periodLength}
                         onChange={(e) => setPeriodLength(e.target.value ? parseInt(e.target.value) : "")}
-                        className="w-20 text-center bg-brand-50/50 p-3 rounded-xl border-none focus:ring-0 text-brand-900 font-black text-lg outline-none"
+                        className="w-20 text-center bg-brand-50 p-3 rounded-xl border border-transparent focus:border-brand-300 focus:ring-0 text-brand-900 font-black text-lg outline-none"
                         required
                       />
-                      <span className="ml-3 text-brand-500 font-medium text-sm">Hari (Biasanya 5 hari)</span>
+                      <span className="ml-3 text-brand-600 font-medium text-sm">Hari (Biasanya 5 hari)</span>
                     </div>
                   </div>
                 </motion.div>
