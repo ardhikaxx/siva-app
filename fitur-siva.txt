@@ -2,56 +2,37 @@ DAFTAR LENGKAP & DETAIL FITUR APLIKASI SIVA
 (Siklus Interaktif Vitalitas wanitA)
 ===============================================================
 
-Aplikasi SIVA adalah platform FemTech yang sangat matang dengan puluhan fungsionalitas yang dikelompokkan ke dalam beberapa modul utama. Berikut adalah daftar komprehensif seluruh fitur yang ada di dalam sistem:
-
-1. MODUL PELACAKAN SIKLUS & PREDIKSI (CORE TRACKING)
-   1.1. Kalkulator Siklus Cerdas: Menggunakan riwayat durasi siklus dan lama haid untuk menghitung prediksi menstruasi bulan berikutnya.
-   1.2. Kalkulator Masa Subur (Fertile Window): Memprediksi rentang 5-6 hari masa paling subur.
-   1.3. Penanda Hari Ovulasi: Menghitung puncak kesuburan berdasarkan panjang siklus luteal.
-   1.4. Tampilan Kalender Interaktif: Kalender visual bulanan yang menandai warna berbeda untuk fase menstruasi, folikular, ovulasi, dan luteal.
-   1.5. Hitung Mundur (Countdown): Menampilkan secara dinamis sisa hari menuju haid berikutnya.
-
-2. MODUL PERSONALISASI PENGGUNA (USER MODES)
-   2.1. Mode Normal: Untuk pelacakan menstruasi standar dan pemahaman ritme tubuh.
-   2.2. Mode Program Hamil (TTC): Fokus pada pelacakan metrik kesuburan, ovulasi, dan suhu basal tubuh.
-   2.3. Mode Kehamilan: Mengubah antarmuka untuk melacak perkembangan usia kandungan per minggu (berdasarkan HPL).
-   2.4. Mode Kontrasepsi (KB): Mode jeda siklus atau sinkronisasi bagi pengguna pil KB, IUD, implan, atau suntik.
-   2.5. Kustomisasi Sindrom Khusus: Pengguna dapat menyalakan mode PCOS atau Endometriosis sehingga aplikasi menyesuaikan pertanyaan dan korelasi jurnal harian.
-
-3. MODUL JURNAL KESEHATAN (HEALTH LOGGING)
-   Sistem pelacakan kesehatan paling lengkap (Lebih dari sekadar aplikasi menstruasi):
-   3.1. Pelacak Suasana Hati (Mood Tracker): Pilihan spesifik dari bahagia, sensitif, cemas, hingga depresi.
-   3.2. Skala Energi: Penilaian energi harian dari sangat lelah hingga sangat berenergi (skala 1-5).
-   3.3. Gejala Fisik: Catatan kram, pusing, mual, kembung, jerawat, sakit payudara, dll.
-   3.4. Skala Nyeri Menstruasi: Slider numerik (1-10) untuk mengukur tingkat keparahan kram perut.
-   3.5. Pelacak Pendarahan (Visual Flow Tracker): Memantau intensitas darah haid (Bercak/Spotting, Ringan, Sedang, Sangat Banyak).
-   3.6. Pelacak Metrik Tubuh (Vitals): Input angka presisi untuk Suhu Basal Tubuh (BBT) dan Fluktuasi Berat Badan.
-   3.7. Pelacak Gaya Hidup: Durasi tidur harian dan kalkulator otomatis konsumsi air putih (gelas).
-   3.8. Pelacak Obat (Medication): Riwayat konsumsi pereda nyeri (Ibuprofen, Paracetamol, dll).
-
-4. MODUL WAWASAN & KECERDASAN BUATAN (INSIGHTS & ANALYTICS)
-   4.1. Algoritma Korelasi Cerdas (Smart Correlation): Sistem menganalisis data jurnal untuk menemukan pola (Contoh: "Durasi tidur Anda memengaruhi tingkat kram" atau "Kurang minum memicu sakit kepala").
-   4.2. Deteksi Dini PMDD: Sistem memantau jika ada kombinasi "Energi Sangat Rendah" + "Mood Depresi/Cemas Parah" selama fase Luteal, dan langsung memberikan alert/peringatan dini.
-   4.3. Health SOS (Peringatan Darurat Medis): Jika algoritma mendeteksi siklus haid < 21 hari, > 35 hari, atau masa haid melebihi batas wajar (> 8 hari), sistem akan merekomendasikan pemeriksaan dokter.
-   4.4. Grafik Tren Kesehatan: Visualisasi diagram tren energi, pola kram, dan durasi tidur versus berat badan.
-
-5. MODUL MANAJEMEN MEDIS
-   5.1. Pembuat Laporan Medis Obgyn (PDF Exporter): Menghasilkan otomatis dokumen rekam medis dari riwayat kesehatan 30-90 hari terakhir (PDF) yang siap cetak untuk diberikan ke dokter kandungan.
-   5.2. Manajemen Stok Pembalut (Pad Inventory Tracker): Mengingatkan pengguna jumlah persediaan pembalut mereka sebelum masa menstruasi tiba.
-
-6. MODUL GAMIFIKASI & MOTIVASI
-   6.1. Self-Care Streaks: Lencana apresiasi bergambar "Api" yang menghitung berapa hari berturut-turut pengguna disiplin mengisi jurnal.
-   6.2. Hydro Homie Badges: Penghargaan digital jika pengguna sukses memenuhi target konsumsi air harian (8 gelas/hari).
-
-7. MODUL SOSIAL & EDUKASI
-   7.1. SIVA Sisterhood (Komunitas): Ruang aman (Safe Space) berformat forum diskusi tempat wanita berbagi keluh kesah secara anonim.
-   7.2. Perpustakaan Edukasi: Ribuan artikel kesehatan reproduksi, pubertas, gizi wanita, dan kehamilan. 
-   7.3. Paginasi Performa Tinggi: Artikel dimuat bertahap (per puluhan data dari ribuan data) untuk mencegah *lagging* atau proses *load* yang lama.
-
-8. MODUL PENGATURAN UI/UX & SISTEM
-   8.1. Sinkronisasi Data Firebase: Semua data disimpan dan disinkronkan ke *cloud database* Firebase secara aman (Realtime Database).
-   8.2. Kustomisasi Tema Dinamis (Color Themes): Antarmuka bisa diganti warnanya ke "Peach", "Matcha" (Hijau), "Ocean" (Biru), "Cyberpunk" (Magenta), dan "Lavender" (Ungu).
-   8.3. Dual Languange (I18n): Sistem dapat diterjemahkan (Bahasa Indonesia & Inggris).
-   8.4. Desain PWA Modern: SIVA dapat diinstal di *home screen* (iOS/Android) layaknya *native app*.
-   8.5. Navigasi & Animasi Premium: Dilengkapi animasi mulus, *skeleton loading*, *toast alert*, *glassmorphism*, dan transisi halaman via Framer Motion.
-   8.6. Privasi Maksimal: Dirancang tanpa notifikasi invasif dan tanpa fitur penghubung ke pasangan guna menjaga independensi medis pengguna.
+1. Kalkulator Siklus Cerdas: Memprediksi haid berikutnya secara otomatis berdasarkan rata-rata riwayat panjang siklus dan periode Anda.
+2. Kalkulator Masa Subur (Fertile Window): Memprediksi rentang 5-6 hari dengan peluang kehamilan (konsepsi) paling tinggi.
+3. Penanda Hari Ovulasi: Menghitung secara spesifik hari puncak pelepasan sel telur berdasarkan fase luteal.
+4. Tampilan Kalender Visual Interaktif: Menandai fase Menstruasi, Folikular, Ovulasi, dan Luteal dalam satu bulan dengan indikator warna.
+5. Hitung Mundur (Countdown) Dinamis: Menampilkan jumlah sisa hari secara presisi menuju masa menstruasi selanjutnya.
+6. Mode Pengguna - Normal: Antarmuka standar untuk pelacakan rutin haid dan pemahaman ritme tubuh sehari-hari.
+7. Mode Pengguna - Program Hamil (TTC): Mengubah tampilan aplikasi untuk fokus memantau peluang hamil, tes kesuburan, dan suhu tubuh.
+8. Mode Pengguna - Kehamilan: Merombak kalender haid menjadi pelacak perkembangan janin/usia kandungan per minggu berdasarkan Hari Perkiraan Lahir (HPL).
+9. Mode Pengguna - Kontrasepsi: Menyinkronkan kalender bagi wanita yang menggunakan Pil KB, IUD, Suntik, atau Implan.
+10. Fokus Mode Sindrom (PCOS & Endometriosis): Aplikasi menyesuaikan jurnal harian untuk secara khusus melacak gejala khas dari sindrom terkait.
+11. Pelacak Suasana Hati (Mood Tracker): Pengguna dapat mencatat emosi harian dari bahagia, sensitif, marah, hingga cemas dan depresi.
+12. Skala Tingkat Energi: Fitur untuk mengukur kelelahan tubuh dengan skala angka 1 (Sangat Lelah) hingga 5 (Sangat Berenergi).
+13. Pelacak Gejala Fisik: Input jurnal untuk mencatat keluhan tubuh seperti pusing, mual, kembung, jerawat, hingga payudara bengkak.
+14. Slider Skala Nyeri Menstruasi: Input geser (slider) untuk mengukur tingkat keparahan kram perut dari angka 1 hingga 10.
+15. Visual Flow Tracker (Pelacak Pendarahan): Mencatat dan membedakan intensitas volume darah yang keluar (Bercak, Ringan, Sedang, Sangat Banyak).
+16. Input Metrik Suhu Basal Tubuh (BBT): Pencatatan suhu badan presisi di pagi hari yang sangat berguna bagi pengguna mode TTC.
+17. Pelacak Fluktuasi Berat Badan: Memantau dan mencatat perubahan berat badan (kg) setiap hari selama berbagai fase siklus.
+18. Kalkulator & Pelacak Konsumsi Air: Fitur klik interaktif untuk menghitung jumlah gelas air putih yang diminum per harinya.
+19. Pelacak Durasi Tidur: Memantau jumlah jam tidur untuk melihat kaitannya dengan kesehatan menstruasi.
+20. Catatan Konsumsi Obat: Log khusus untuk mencatat kapan dan obat pereda nyeri apa yang diminum (contoh: Paracetamol, Ibuprofen).
+21. Algoritma Korelasi Cerdas SIVA: AI internal yang menganalisis seluruh data jurnal dan menemukan hubungan sebab-akibat (Misal: "Tidur kurang dari 5 jam memperburuk kram perut Anda").
+22. Deteksi Dini PMDD (Premenstrual Dysphoric Disorder): Algoritma mengirimkan peringatan (alert) otomatis jika pengguna terus-menerus mencatat depresi/kecemasan ekstrem menjelang jadwal haid.
+23. Alarm Darurat Medis (Health SOS): Mengingatkan pengguna untuk periksa ke dokter apabila siklus terdeteksi <21 hari, >35 hari, haid melebihi 8 hari, atau nyeri perut yang sangat ekstrem.
+24. Grafik Analitik Kesehatan (Charts): Visualisasi diagram yang memperlihatkan tren energi mingguan, kualitas tidur, dan pola nyeri setiap bulannya.
+25. Pembuat Laporan Medis Obgyn (PDF Exporter): Tombol untuk secara otomatis menyusun dan mengunduh rekam jejak menstruasi 90 hari terakhir menjadi dokumen PDF yang rapi untuk diserahkan ke dokter spesialis.
+26. Manajemen Stok Pembalut (Pad Inventory Tracker): Aplikasi menghitung sisa pembalut Anda dan mengingatkan untuk membeli jika persediaan menipis menjelang jadwal haid.
+27. Gamifikasi Jurnal (Self-Care Streaks): Memberikan lencana (badge) "Api" sebagai bentuk apresiasi bagi pengguna yang disiplin mencatat jurnal kesehatannya setiap hari tanpa putus.
+28. Tantangan "Hydro Homie": Lencana pencapaian digital khusus yang akan menyala jika pengguna berhasil memenuhi target hidrasi 8 gelas air/hari.
+29. SIVA Sisterhood (Komunitas): Forum diskusi bawaan yang dianonimkan agar pengguna bisa saling curhat, berbagi keluh kesah haid, dan mencari dukungan mental secara aman (Safe Space).
+30. Pusat Edukasi Kesehatan: Akses cepat ke perpustakaan berisi ribuan artikel seputar kesehatan reproduksi wanita dengan teknologi "Paginasi" agar anti-lagging.
+31. Tema UI Dinamis (Color Switcher): Personalisasi penuh warna antarmuka aplikasi dengan tema siap pakai: Peach, Matcha, Ocean, Cyberpunk, dan Lavender.
+32. Dukungan Terjemahan Otomatis (I18n): Fitur transisi mulus untuk merubah seluruh teks dalam aplikasi ke Bahasa Indonesia (ID) atau Bahasa Inggris (EN).
+33. Desain PWA Responsif & Animasi Premium: Aplikasi dirancang dengan prinsip Progressive Web App (dapat di-install ke HP/PC) yang dilengkapi interaksi elemen bergaya Glassmorphism dan animasi transisi Framer Motion.
+34. Privasi & Keamanan Cloud: Seluruh rekaman jurnal disimpan secara real-time (Firebase Database) dengan perlindungan privasi ketat (sengaja didesain tanpa notifikasi ke pasangan atau fitur pelacak keuangan demi otonomi medis wanita).
