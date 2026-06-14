@@ -9,6 +9,17 @@ export default function Education() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Semua");
   const [selectedArticle, setSelectedArticle] = useState<any | null>(null);
+  const [visibleCount, setVisibleCount] = useState(10);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+    setVisibleCount(10);
+  };
+
+  const handleCategoryChange = (cat: string) => {
+    setSelectedCategory(cat);
+    setVisibleCount(10);
+  };
 
   const categories = ["Semua", ...Array.from(new Set(articlesData.map(a => a.category)))];
 
@@ -42,7 +53,7 @@ export default function Education() {
             type="text" 
             placeholder="Cari mitos, tips, atau gejala..."
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={handleSearchChange}
             className="w-full bg-white border border-brand-100 rounded-2xl py-3 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 text-brand-900 transition-shadow"
           />
         </div>
@@ -52,7 +63,7 @@ export default function Education() {
             <motion.button
               whileTap={{ scale: 0.95 }}
               key={cat}
-              onClick={() => setSelectedCategory(cat)}
+              onClick={() => handleCategoryChange(cat)}
               className={`whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-semibold transition-colors ${
                 selectedCategory === cat 
                   ? 'bg-brand-500 text-white shadow-md' 
@@ -71,7 +82,7 @@ export default function Education() {
         animate="visible"
         variants={{
           hidden: { opacity: 0 },
-          visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+          visible: { opacity: 1, transition: { staggerChildren: 0.05 } }
         }}
         className="space-y-4"
       >
@@ -86,7 +97,7 @@ export default function Education() {
             <p className="text-brand-500 text-sm">Tidak ada artikel yang cocok.</p>
           </motion.div>
         ) : (
-          filteredArticles.map(article => (
+          filteredArticles.slice(0, visibleCount).map(article => (
             <motion.div 
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
               whileHover={{ scale: 1.02 }}
@@ -107,6 +118,16 @@ export default function Education() {
               <p className="text-sm text-gray-500 line-clamp-2">{article.content}</p>
             </motion.div>
           ))
+        )}
+
+        {visibleCount < filteredArticles.length && (
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setVisibleCount(prev => prev + 10)}
+            className="w-full py-3 mt-4 text-brand-600 font-bold bg-white border border-brand-200 rounded-xl shadow-sm hover:bg-brand-50 transition-colors"
+          >
+            Muat Lebih Banyak
+          </motion.button>
         )}
       </motion.div>
 
