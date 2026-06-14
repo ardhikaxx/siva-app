@@ -1,34 +1,14 @@
-DAFTAR LENGKAP & DETAIL FITUR APLIKASI SIVA
-(Siklus Interaktif Vitalitas wanitA)
-===============================================================
+🌟 MEET SIVA: Siklus Interaktif Vitalitas wanitA 🌟
+Aplikasi pelacak kewanitaan revolusioner yang bukan sekadar kalender haid biasa!
 
-1. Kalkulator Siklus Cerdas: Memprediksi haid berikutnya secara otomatis berdasarkan rata-rata riwayat panjang siklus dan periode Anda.
-2. Kalkulator Masa Subur (Fertile Window): Memprediksi rentang 5-6 hari dengan peluang kehamilan (konsepsi) paling tinggi.
-3. Penanda Hari Ovulasi: Menghitung secara spesifik hari puncak pelepasan sel telur berdasarkan fase luteal.
-4. Tampilan Kalender Visual Interaktif: Menandai fase Menstruasi, Folikular, Ovulasi, dan Luteal dalam satu bulan dengan indikator warna.
-5. Hitung Mundur (Countdown) Dinamis: Menampilkan jumlah sisa hari secara presisi menuju masa menstruasi selanjutnya.
-6. Mode Pengguna - Normal: Antarmuka standar untuk pelacakan rutin haid dan pemahaman ritme tubuh sehari-hari.
-7. Mode Pengguna - Program Hamil (TTC): Mengubah tampilan aplikasi untuk fokus memantau peluang hamil, tes kesuburan, dan suhu tubuh.
-8. Mode Pengguna - Kehamilan: Merombak kalender haid menjadi pelacak perkembangan janin/usia kandungan per minggu berdasarkan Hari Perkiraan Lahir (HPL).
-9. Mode Pengguna - Kontrasepsi: Menyinkronkan kalender bagi wanita yang menggunakan Pil KB, IUD, Suntik, atau Implan.
-10. Fokus Mode Sindrom (PCOS & Endometriosis): Aplikasi menyesuaikan jurnal harian untuk secara khusus melacak gejala khas dari sindrom terkait.
-11. Pelacak Suasana Hati (Mood Tracker): Pengguna dapat mencatat emosi harian dari bahagia, sensitif, marah, hingga cemas dan depresi.
-12. Skala Tingkat Energi: Fitur untuk mengukur kelelahan tubuh dengan skala angka 1 (Sangat Lelah) hingga 5 (Sangat Berenergi).
-13. Pelacak Gejala Fisik: Input jurnal untuk mencatat keluhan tubuh seperti pusing, mual, kembung, jerawat, hingga payudara bengkak.
-14. Slider Skala Nyeri Menstruasi: Input geser (slider) untuk mengukur tingkat keparahan kram perut dari angka 1 hingga 10.
-15. Visual Flow Tracker (Pelacak Pendarahan): Mencatat dan membedakan intensitas volume darah yang keluar (Bercak, Ringan, Sedang, Sangat Banyak).
-16. Input Metrik Suhu Basal Tubuh (BBT): Pencatatan suhu badan presisi di pagi hari yang sangat berguna bagi pengguna mode TTC.
-17. Pelacak Fluktuasi Berat Badan: Memantau dan mencatat perubahan berat badan (kg) setiap hari selama berbagai fase siklus.
-18. Kalkulator & Pelacak Konsumsi Air: Fitur klik interaktif untuk menghitung jumlah gelas air putih yang diminum per harinya.
-19. Pelacak Durasi Tidur: Memantau jumlah jam tidur untuk melihat kaitannya dengan kesehatan menstruasi.
-20. Catatan Konsumsi Obat: Log khusus untuk mencatat kapan dan obat pereda nyeri apa yang diminum (contoh: Paracetamol, Ibuprofen).
-21. Algoritma Korelasi Cerdas SIVA: AI internal yang menganalisis seluruh data jurnal dan menemukan hubungan sebab-akibat (Misal: "Tidur kurang dari 5 jam memperburuk kram perut Anda").
-22. Deteksi Dini PMDD (Premenstrual Dysphoric Disorder): Algoritma mengirimkan peringatan (alert) otomatis jika pengguna terus-menerus mencatat depresi/kecemasan ekstrem menjelang jadwal haid.
-23. Alarm Darurat Medis (Health SOS): Mengingatkan pengguna untuk periksa ke dokter apabila siklus terdeteksi <21 hari, >35 hari, haid melebihi 8 hari, atau nyeri perut yang sangat ekstrem.
-24. Grafik Analitik Kesehatan (Charts): Visualisasi diagram yang memperlihatkan tren energi mingguan, kualitas tidur, dan pola nyeri setiap bulannya.
-25. Pembuat Laporan Medis Obgyn (PDF Exporter): Tombol untuk secara otomatis menyusun dan mengunduh rekam jejak menstruasi 90 hari terakhir menjadi dokumen PDF yang rapi untuk diserahkan ke dokter spesialis.
-26. Manajemen Stok Pembalut (Pad Inventory Tracker): Aplikasi menghitung sisa pembalut Anda dan mengingatkan untuk membeli jika persediaan menipis menjelang jadwal haid.
-27. Gamifikasi Jurnal (Self-Care Streaks): Memberikan lencana (badge) "Api" sebagai bentuk apresiasi bagi pengguna yang disiplin mencatat jurnal kesehatannya setiap hari tanpa putus.
-28. Tantangan "Hydro Homie": Lencana pencapaian digital khusus yang akan menyala jika pengguna berhasil memenuhi target hidrasi 8 gelas air/hari.
-29. SIVA Sisterhood (Komunitas): Forum diskusi bawaan yang dianonimkan agar pengguna bisa saling curhat, berbagi keluh kesah haid, dan mencari dukungan mental secara aman (Safe Space).
-30. Pusat Edukasi Kesehatan: Akses cepat ke perpustakaan berisi ribuan artikel seputar kesehatan reproduksi wanita dengan teknologi "Paginasi" agar anti-lagging.
+✨ KENAPA HARUS SIVA?
+🌸 Pelacakan Cerdas & Akurat (Kalender Menstruasi & Masa Subur)
+⚡ Jurnal Kesehatan Terlengkap (Lacak Mood, Nyeri, Flow, BBT, Tidur & Air!)
+💡 AI Analitik & Wawasan: SIVA tahu kalau kamu kurang tidur, krammu bakal makin parah!
+⚠️ Deteksi PMDD & Health SOS (SIVA peduli saat siklusmu tidak wajar)
+👩‍⚕️ Ekspor Rekam Medis Otomatis (Cetak PDF langsung kasih ke Obgyn)
+🤝 SIVA Sisterhood (Safe space buat saling curhat anonim bareng sesama wanita)
+
+Lebih dari sekadar mencatat, SIVA memahami tubuhmu seutuhnya. 💖✨
+
+#SivaApp #KesehatanWanita #FemTech #KenaliTubuhmu
