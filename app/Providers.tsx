@@ -3,11 +3,11 @@
 import { AuthProvider } from "@/context/AuthContext";
 import { CycleProvider } from "@/context/CycleContext";
 import { AlertProvider } from "@/context/AlertContext";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider>
       <AuthProvider>
         <CycleProvider>
           <AlertProvider>
