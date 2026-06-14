@@ -10,6 +10,7 @@ import { id } from "date-fns/locale";
 import { Droplet, Info, Calendar as CalendarIcon, UserCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAlert } from "@/context/AlertContext";
+import Image from "next/image";
 
 export default function Home() {
   const router = useRouter();
@@ -106,10 +107,10 @@ export default function Home() {
           )}
           <button 
             onClick={() => router.push("/settings")}
-            className="w-10 h-10 rounded-full bg-white text-brand-600 flex items-center justify-center shadow-sm border border-brand-100"
+            className="w-10 h-10 rounded-full bg-white text-brand-600 flex items-center justify-center shadow-sm border border-brand-100 overflow-hidden"
           >
             {user?.photoURL ? (
-              <img src={user.photoURL} alt="Profil" className="w-full h-full object-cover rounded-full" />
+              <Image src={user.photoURL} alt="Profil" width={40} height={40} className="w-full h-full object-cover rounded-full" />
             ) : (
               <UserCircle size={20} />
             )}

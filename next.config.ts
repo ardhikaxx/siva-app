@@ -12,6 +12,14 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   devIndicators: false,
   turbopack: {},
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+  },
 };
 
 export default withPWA(nextConfig);

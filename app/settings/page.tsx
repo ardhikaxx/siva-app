@@ -12,6 +12,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { useEffect, useState } from "react";
 import { useNotifications } from "@/hooks/useNotifications";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Settings() {
   const { user, signOut } = useAuth();
@@ -80,9 +81,11 @@ export default function Settings() {
         <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="bg-white p-6 rounded-3xl shadow-sm border border-brand-100 mb-6 flex items-center">
           <div className="w-16 h-16 bg-brand-100 text-brand-500 rounded-full flex justify-center items-center mr-4 overflow-hidden">
             {user?.photoURL && !imgError ? (
-              <img 
+              <Image 
                 src={user.photoURL} 
                 alt="Foto Profil" 
+                width={64}
+                height={64}
                 className="w-full h-full object-cover" 
                 onError={() => setImgError(true)} 
               />
