@@ -1,0 +1,21 @@
+DAFTAR FITUR APLIKASI SIVA (Siklus Interaktif Vitalitas wanitA)
+===============================================================
+
+1. Pelacakan Siklus Cerdas & Prediksi Menstruasi (Berbasis riwayat siklus).
+2. Prediksi Jendela Kesuburan (Fertile Window) & Hari Ovulasi.
+3. Mode Pengguna Dinamis: Normal, Program Hamil (TTC), Kehamilan (Tracking Usia Kandungan), dan Kontrasepsi.
+4. Kustomisasi Fokus Sindrom Kewanitaan: Penyesuaian khusus untuk penderita PCOS dan Endometriosis.
+5. Jurnal Kesehatan Harian Komprehensif: Pencatatan Suasana Hati (Mood), Tingkat Energi, Skala Nyeri, Pengobatan, dan Gejala Fisik.
+6. Pelacak Intensitas Pendarahan (Flow Tracker): Memantau tingkat volume darah haid (Bercak, Ringan, Sedang, Sangat Banyak).
+7. Pelacak Metrik Fisik Tambahan: Input harian Suhu Basal Tubuh (BBT), Durasi Tidur, Berat Badan, dan Konsumsi Air Putih.
+8. Wawasan & Korelasi SIVA Cerdas: Algoritma cerdas yang menganalisis kaitan antara kebiasaan harian dengan gejala kesehatan (Misal: Kurang tidur meningkatkan kram).
+9. Deteksi Dini Risiko PMDD (Premenstrual Dysphoric Disorder): Peringatan otomatis apabila terdeteksi pola depresi/kecemasan ekstrem menjelang haid.
+10. Alarm Medis Darurat (Health SOS): Deteksi siklus tidak wajar (sangat pendek, sangat panjang) dan peringatan pendarahan/nyeri ekstrem.
+11. Pembuat Laporan Medis PDF (Obgyn Export): Merangkum data kesehatan 30-90 hari terakhir menjadi dokumen PDF yang rapi untuk dibawa saat konsultasi dokter.
+12. Gamifikasi (Streaks & Badges): Sistem apresiasi "Api Harian" untuk kerajinan mengisi jurnal dan lencana "Hydro Homie" untuk kecukupan air minum.
+13. SIVA Sisterhood: Forum komunitas diskusi rahasia dan anonim yang aman bagi sesama wanita untuk saling mendukung.
+14. Pusat Edukasi Kewanitaan: Akses perpustakaan artikel kesehatan reproduksi yang dimuat sangat cepat (Sistem Paginasi).
+15. Kustomisasi Tema UI Dinamis: Pemilihan warna antarmuka (Peach, Matcha, Ocean, Cyberpunk, Lavender) sesuai selera pengguna.
+16. Dukungan Dua Bahasa (I18n): Tersedia dalam pengaturan Bahasa Indonesia dan Bahasa Inggris.
+17. Desain Responsif & Premium: Tampilan PWA (Progressive Web App) yang sangat halus dibekali animasi modern (Framer Motion).
+18. Privasi Tingkat Tinggi: Data kesehatan pribadi sangat dilindungi (Didesain tanpa celah tracking finansial atau notifikasi invasif ke pasangan demi independensi medis).
