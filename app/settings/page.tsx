@@ -8,6 +8,7 @@ import { id } from "date-fns/locale";
 import { LogOut, User, Settings as SettingsIcon, AlertCircle, Trash2, Moon, Sun } from "lucide-react";
 import { useAlert } from "@/context/AlertContext";
 import { useTheme } from "@/context/ThemeContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { useEffect, useState } from "react";
 import { useNotifications } from "@/hooks/useNotifications";
 
