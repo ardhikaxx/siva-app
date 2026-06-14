@@ -81,6 +81,7 @@ export default function Home() {
     }
   };
 
+  return (
     <div className="min-h-screen bg-brand-50 p-6 pb-24 overflow-x-hidden">
       <motion.header 
         initial={{ opacity: 0, y: -20 }}
