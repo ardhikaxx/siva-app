@@ -201,7 +201,7 @@ export default function Settings() {
               </div>
               <select 
                 value={settings?.userMode || "normal"}
-                onChange={(e) => updateSettings({ ...settings!, userMode: e.target.value as any })}
+                onChange={(e) => updateSettings({ ...settings!, userMode: e.target.value as "normal" | "ttc" | "pregnancy" | "contraception" })}
                 className="bg-brand-50 border border-brand-200 text-brand-900 text-xs rounded-lg focus:ring-brand-500 focus:border-brand-500 block p-2 outline-none"
               >
                 <option value="normal">Normal</option>
@@ -232,7 +232,7 @@ export default function Settings() {
                 </div>
                 <select 
                   value={settings?.contraceptionType || "pill"}
-                  onChange={(e) => updateSettings({ ...settings!, contraceptionType: e.target.value as any })}
+                  onChange={(e) => updateSettings({ ...settings!, contraceptionType: e.target.value as "pill" | "iud" | "implant" | "injection" | "none" })}
                   className="bg-white border border-brand-200 text-brand-900 text-xs rounded-lg p-2 outline-none"
                 >
                   <option value="pill">Pil KB</option>

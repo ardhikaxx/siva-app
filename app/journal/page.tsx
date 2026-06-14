@@ -290,7 +290,7 @@ export default function Journal() {
                   <button
                     key={f.value}
                     type="button"
-                    onClick={() => setFlowIntensity(flowIntensity === f.value ? "" : f.value as any)}
+                    onClick={() => setFlowIntensity(flowIntensity === f.value ? "" : f.value as "bercak" | "ringan" | "sedang" | "berat" | "")}
                     className={`py-2 rounded-xl text-xs font-bold transition-all border ${flowIntensity === f.value ? f.color + ' ring-2 ring-red-400 ring-offset-1' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}
                   >
                     {f.label}
