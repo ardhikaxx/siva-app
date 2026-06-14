@@ -214,8 +214,22 @@ function OnboardingContent() {
         </form>
       </motion.div>
       
+      {!isEditMode && (
+        <div className="mt-8 text-center relative z-10">
+          <p className="text-sm text-brand-800 font-medium">
+            Sudah pernah mendaftar sebelumnya?{" "}
+            <button 
+              onClick={() => router.push('/login')}
+              className="text-brand-600 font-black hover:underline"
+            >
+              Masuk di sini
+            </button>
+          </p>
+        </div>
+      )}
+
       {/* Footer Text */}
-      <p className="mt-8 text-brand-400 text-xs text-center max-w-xs relative z-10">
+      <p className="mt-6 text-brand-400 text-xs text-center max-w-xs relative z-10">
         Data Anda dienkripsi dengan aman dan sepenuhnya menjadi milik privasi Anda.
       </p>
     </div>
