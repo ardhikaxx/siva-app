@@ -1,14 +1,16 @@
-🌟 MEET SIVA: Siklus Interaktif Vitalitas wanitA 🌟
-Aplikasi pelacak kewanitaan revolusioner yang bukan sekadar kalender haid biasa!
+DAFTAR FITUR UTAMA APLIKASI SIVA
+(Siklus Interaktif Vitalitas wanitA)
+===============================================================
 
-✨ KENAPA HARUS SIVA?
-🌸 Pelacakan Cerdas & Akurat (Kalender Menstruasi & Masa Subur)
-⚡ Jurnal Kesehatan Terlengkap (Lacak Mood, Nyeri, Flow, BBT, Tidur & Air!)
-💡 AI Analitik & Wawasan: SIVA tahu kalau kamu kurang tidur, krammu bakal makin parah!
-⚠️ Deteksi PMDD & Health SOS (SIVA peduli saat siklusmu tidak wajar)
-👩‍⚕️ Ekspor Rekam Medis Otomatis (Cetak PDF langsung kasih ke Obgyn)
-🤝 SIVA Sisterhood (Safe space buat saling curhat anonim bareng sesama wanita)
-
-Lebih dari sekadar mencatat, SIVA memahami tubuhmu seutuhnya. 💖✨
-
-#SivaApp #KesehatanWanita #FemTech #KenaliTubuhmu
+1. Pelacakan Siklus Cerdas & Kalender Interaktif: Memprediksi menstruasi, jendela kesuburan (fertile window), dan hari ovulasi secara presisi berdasarkan riwayat siklus Anda.
+2. Mode Pengguna Dinamis: Aplikasi beradaptasi penuh dengan 4 pilihan mode: Normal, Program Hamil (TTC), Kehamilan, dan sinkronisasi metode Kontrasepsi.
+3. Kustomisasi Medis Sindrom Khusus: Algoritma dan jurnal yang dirancang spesifik untuk mendampingi penderita PCOS maupun Endometriosis.
+4. Jurnal Kesehatan Harian Komprehensif: Sistem log harian untuk memantau mood, tingkat energi, skala nyeri haid (1-10), durasi tidur, berat badan, hingga intensitas pendarahan (Flow Tracker).
+5. Wawasan & Korelasi Cerdas (AI Data Analytics): Algoritma yang menganalisis kebiasaan sehari-hari Anda untuk menemukan hubungan sebab-akibat dengan gejala menstruasi yang dialami (misal: "kurang minum memperparah kembung").
+6. Deteksi Dini Risiko PMDD: Sistem peringatan otomatis jika aplikasi mendeteksi pola perubahan suasana hati (depresi/kecemasan) yang ekstrem pada fase Luteal.
+7. Alarm Darurat Medis (Health SOS): Notifikasi pintar yang merekomendasikan pemeriksaan ke Obgyn jika mendeteksi anomali pada siklus (sangat pendek, sangat panjang, atau haid berkepanjangan).
+8. Pembuat Laporan Medis (PDF Exporter): Fitur sekali-klik untuk mengunduh rekam jejak kesehatan 90 hari terakhir menjadi dokumen PDF yang rapi, dirancang khusus untuk ditunjukkan ke dokter kandungan.
+9. Gamifikasi Kesehatan (Streaks & Badges): Sistem apresiasi "Api Harian" untuk kedisiplinan mencatat jurnal dan lencana khusus "Hydro Homie" untuk target kecukupan hidrasi.
+10. Komunitas Anonim (SIVA Sisterhood): Ruang aman (safe space) internal untuk sesama pengguna saling berbagi cerita dan memberikan dukungan emosional tanpa identitas.
+11. Pusat Edukasi Kewanitaan: Akses instan ke ratusan artikel tervalidasi seputar kesehatan reproduksi dengan teknologi muat data anti-lagging (Paginasi).
+12. Kustomisasi Tema & Bilingual: Antarmuka yang bisa disesuaikan dengan 5 pilihan warna estetis (Tema Dinamis) serta mendukung pergantian Bahasa Indonesia (ID) dan Bahasa Inggris (EN).
