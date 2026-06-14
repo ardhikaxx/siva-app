@@ -23,6 +23,24 @@ export default function Home() {
     }
   }, [cycleLoading, authLoading, settings, router]);
 
+  useEffect(() => {
+    if (info && settings) {
+      if (info.daysUntilNextPeriod <= 3 && (settings.padInventory === undefined || settings.padInventory < 3)) {
+        const popupShownKey = `siva_pad_alert_shown_${info.nextPeriodDate}`;
+        if (!localStorage.getItem(popupShownKey)) {
+          setTimeout(() => {
+            showAlert({
+              title: "Pengingat Restok Cerdas 🛍️",
+              text: `Pembalutmu sisa ${settings.padInventory || 0}, sepertinya haidmu sebentar lagi datang. Jangan lupa mampir ke minimarket!`,
+              type: "warning"
+            });
+            localStorage.setItem(popupShownKey, "true");
+          }, 1000);
+        }
+      }
+    }
+  }, [info, settings, showAlert]);
+
   if (cycleLoading || authLoading || !settings || !info) {
     return (
       <div className="min-h-screen bg-brand-50 p-6 flex flex-col items-center pb-24">

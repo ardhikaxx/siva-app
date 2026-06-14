@@ -30,6 +30,7 @@ export default function Journal() {
   
   const [mood, setMood] = useState("");
   const [energy, setEnergy] = useState(3);
+  const [painLevel, setPainLevel] = useState(1);
   const [symptoms, setSymptoms] = useState<string[]>([]);
   const [medications, setMedications] = useState<string[]>([]);
   const [waterGlasses, setWaterGlasses] = useState(0);
@@ -46,6 +47,7 @@ export default function Journal() {
         setTimeout(() => {
           setMood(todayEntry.mood || "");
           setEnergy(todayEntry.energyLevel || 3);
+          setPainLevel(todayEntry.painLevel || 1);
           setSymptoms(todayEntry.symptoms || []);
           setMedications(todayEntry.medications || []);
           setWaterGlasses(todayEntry.waterGlasses || 0);
@@ -80,6 +82,7 @@ export default function Journal() {
       await saveEntry(todayKey, {
         mood,
         energyLevel: energy,
+        painLevel: painLevel,
         symptoms,
         medications,
         waterGlasses,
@@ -181,6 +184,32 @@ export default function Journal() {
             <div className="flex justify-between text-xs text-brand-500 mt-2">
               <span>Sangat Rendah</span>
               <span>Sangat Tinggi</span>
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-3xl shadow-sm border border-brand-100">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-sm font-semibold text-brand-900">Intensitas Nyeri (Skala 1-10)</h2>
+              <span className={`text-xs font-bold px-2 py-1 rounded-full ${
+                painLevel <= 3 ? 'bg-green-100 text-green-700' :
+                painLevel <= 7 ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700'
+              }`}>Level {painLevel}</span>
+            </div>
+            <input 
+              type="range" 
+              min="1" 
+              max="10" 
+              value={painLevel} 
+              onChange={(e) => setPainLevel(parseInt(e.target.value))}
+              className={`w-full ${
+                painLevel <= 3 ? 'accent-green-500' :
+                painLevel <= 7 ? 'accent-yellow-500' : 'accent-red-500'
+              }`}
+            />
+            <div className="flex justify-between text-xs text-brand-500 mt-2">
+              <span>Ringan</span>
+              <span>Sedang</span>
+              <span>Sangat Parah</span>
             </div>
           </div>
           
@@ -317,8 +346,11 @@ export default function Journal() {
                   )}
                 </div>
                 
-                <div className="mb-3 text-xs text-gray-600">
-                  <span className="font-medium">Energi:</span> {entry.energyLevel}/5
+                <div className="mb-3 text-xs text-gray-600 flex gap-4">
+                  <span><span className="font-medium">Energi:</span> {entry.energyLevel}/5</span>
+                  {entry.painLevel ? (
+                    <span><span className="font-medium">Nyeri:</span> Level {entry.painLevel}/10</span>
+                  ) : null}
                 </div>
 
                 {entry.symptoms && entry.symptoms.length > 0 && (

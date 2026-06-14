@@ -14,6 +14,7 @@ export interface JournalEntry {
   expense?: number;
   temperature?: number;
   weight?: number;
+  painLevel?: number; // 1-10 Scale
   cyclePhaseAtEntry?: string; // Phase during that day
 }
 
