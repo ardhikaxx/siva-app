@@ -211,6 +211,7 @@ export const analyzeHealth = (
   // 3. Check for severe symptoms in the last 30 days
   const thirtyDaysAgo = subDays(new Date(), 30);
   let severeCrampsCount = 0;
+  let pmddSymptomCount = 0;
   
   Object.entries(entries).forEach(([dateStr, entry]) => {
     if (isBefore(thirtyDaysAgo, parseISO(dateStr))) {
@@ -221,6 +222,14 @@ export const analyzeHealth = (
         (entry.symptoms?.includes("sakit_kepala") && energy <= 2);
         
       if (isSevere) severeCrampsCount++;
+
+      // Check for PMDD (Severe mood shifts in Luteal phase)
+      if (entry.cyclePhaseAtEntry === "luteal") {
+        const severeMoods = ["Sedih", "Cemas", "Kecemasan Parah", "Mudah Tersinggung", "Depresi"];
+        if (entry.mood && severeMoods.includes(entry.mood) && energy <= 2) {
+          pmddSymptomCount++;
+        }
+      }
     }
   });
 
@@ -229,6 +238,15 @@ export const analyzeHealth = (
       id: "severe_pain",
       title: "Peringatan Nyeri Berlebih",
       message: "Anda melaporkan kram/nyeri parah yang menguras energi dalam sebulan terakhir. Jika nyeri ini sangat mengganggu aktivitas harian, sebaiknya diskusikan dengan dokter kandungan.",
+      severity: "danger"
+    });
+  }
+
+  if (pmddSymptomCount >= 3) {
+    alerts.push({
+      id: "pmdd_risk",
+      title: "Indikasi Risiko PMDD",
+      message: "Kami mendeteksi perubahan suasana hati yang drastis (kecemasan/kesedihan mendalam) selama fase pramenstruasi (luteal) Anda. Ini bisa jadi tanda PMDD (Premenstrual Dysphoric Disorder). Pertimbangkan berkonsultasi dengan profesional.",
       severity: "danger"
     });
   }

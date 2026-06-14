@@ -48,6 +48,7 @@ export default function Journal() {
   const [temperature, setTemperature] = useState<number | ''>('');
   const [weight, setWeight] = useState<number | ''>('');
   const [sleepHours, setSleepHours] = useState<number | ''>('');
+  const [flowIntensity, setFlowIntensity] = useState<"bercak" | "ringan" | "sedang" | "berat" | "">("");
   const [notes, setNotes] = useState("");
   const [isSaved, setIsSaved] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -66,6 +67,7 @@ export default function Journal() {
           setTemperature(todayEntry.temperature || '');
           setWeight(todayEntry.weight || '');
           setSleepHours(todayEntry.sleepHours || '');
+          setFlowIntensity(todayEntry.flowIntensity || '');
           setNotes(todayEntry.notes || "");
         }, 0);
       }
@@ -102,6 +104,7 @@ export default function Journal() {
         temperature: typeof temperature === 'number' ? temperature : undefined,
         weight: typeof weight === 'number' ? weight : undefined,
         sleepHours: typeof sleepHours === 'number' ? sleepHours : undefined,
+        flowIntensity: flowIntensity || undefined,
         notes,
         cyclePhaseAtEntry: info?.currentPhase || "unknown"
       });
@@ -273,6 +276,29 @@ export default function Journal() {
               ))}
             </div>
           </motion.div>
+
+          {(info?.currentPhase === "menstruasi" || symptoms.some(s => s.toLowerCase().includes("darah") || s.toLowerCase().includes("bercak"))) && (
+            <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="bg-white p-6 rounded-3xl shadow-sm border border-brand-100">
+              <h2 className="text-sm font-semibold text-brand-900 mb-4 flex items-center">🩸 Intensitas Pendarahan</h2>
+              <div className="grid grid-cols-4 gap-2">
+                {[
+                  { value: "bercak", label: "Bercak", color: "bg-red-50 text-red-700 border-red-200" },
+                  { value: "ringan", label: "Ringan", color: "bg-red-100 text-red-800 border-red-300" },
+                  { value: "sedang", label: "Sedang", color: "bg-red-300 text-red-900 border-red-400" },
+                  { value: "berat", label: "Sangat Banyak", color: "bg-red-600 text-white border-red-600" }
+                ].map(f => (
+                  <button
+                    key={f.value}
+                    type="button"
+                    onClick={() => setFlowIntensity(flowIntensity === f.value ? "" : f.value as any)}
+                    className={`py-2 rounded-xl text-xs font-bold transition-all border ${flowIntensity === f.value ? f.color + ' ring-2 ring-red-400 ring-offset-1' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          )}
 
           <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="bg-white p-6 rounded-3xl shadow-sm border border-brand-100">
             <h2 className="text-sm font-semibold text-brand-900 mb-4 flex items-center">🌡️ Metrik Fisik Harian</h2>

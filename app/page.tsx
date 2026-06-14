@@ -5,17 +5,19 @@ import { useRouter } from "next/navigation";
 import { useCycleData } from "@/context/CycleContext";
 import { useAuth } from "@/context/AuthContext";
 import CycleWheel from "@/components/CycleWheel";
-import { format, parseISO } from "date-fns";
+import { format, parseISO, subDays } from "date-fns";
 import { id } from "date-fns/locale";
-import { Droplet, Info, Calendar as CalendarIcon, UserCircle } from "lucide-react";
+import { Droplet, Info, Calendar as CalendarIcon, UserCircle, Award, Flame } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAlert } from "@/context/AlertContext";
 import Image from "next/image";
+import { useJournal } from "@/hooks/useJournal";
 
 export default function Home() {
   const router = useRouter();
   const { settings, info, loading: cycleLoading, markPeriodStart } = useCycleData();
   const { user, loading: authLoading } = useAuth();
+  const { entries, loading: journalLoading } = useJournal();
   const { confirm, showAlert } = useAlert();
 
   useEffect(() => {
@@ -23,6 +25,39 @@ export default function Home() {
       router.push("/onboarding");
     }
   }, [cycleLoading, authLoading, settings, router]);
+
+  // Gamification Logic
+  let currentStreak = 0;
+  let hasHydroHomie = false;
+  
+  if (entries) {
+    // Calculate streak
+    let checkDate = new Date();
+    while (true) {
+      const dateStr = format(checkDate, "yyyy-MM-dd");
+      if (entries[dateStr]) {
+        currentStreak++;
+        checkDate = subDays(checkDate, 1);
+      } else {
+        // If today is not logged, check yesterday. If yesterday is not logged, streak breaks.
+        if (currentStreak === 0 && format(checkDate, "yyyy-MM-dd") === format(new Date(), "yyyy-MM-dd")) {
+          checkDate = subDays(checkDate, 1);
+          if (entries[format(checkDate, "yyyy-MM-dd")]) {
+            currentStreak++;
+            checkDate = subDays(checkDate, 1);
+            continue;
+          }
+        }
+        break;
+      }
+    }
+
+    // Check for Hydro badge (8 glasses of water today or any day recently)
+    const todayStr = format(new Date(), "yyyy-MM-dd");
+    if (entries[todayStr]?.waterGlasses && entries[todayStr].waterGlasses! >= 8) {
+      hasHydroHomie = true;
+    }
+  }
 
   useEffect(() => {
     if (info && settings) {
@@ -220,7 +255,7 @@ export default function Home() {
           variants={{ hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0 } }}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          onClick={() => window.location.href = '/community'}
+          onClick={() => router.push('/community')}
           className="mb-4 w-full bg-gradient-to-r from-brand-500 to-purple-500 rounded-2xl p-5 text-white shadow-md cursor-pointer flex items-center justify-between"
         >
           <div>
@@ -231,6 +266,25 @@ export default function Home() {
           </div>
           <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
             <span className="text-xl">💬</span>
+          </div>
+        </motion.div>
+
+        {/* Gamifikasi Section */}
+        <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="w-full mb-6 mt-2">
+          <h2 className="text-sm font-bold text-brand-900 mb-3 px-2 flex items-center">
+            <Award size={16} className="mr-2 text-brand-500" /> Pencapaian Anda
+          </h2>
+          <div className="grid grid-cols-2 gap-4">
+            <div className={`p-4 rounded-2xl border ${currentStreak > 0 ? 'bg-orange-50 border-orange-200 shadow-sm' : 'bg-white border-gray-100'} flex flex-col items-center justify-center text-center transition-colors`}>
+              <Flame size={24} className={`mb-2 ${currentStreak > 0 ? 'text-orange-500' : 'text-gray-300'}`} />
+              <h3 className="font-bold text-brand-900 text-lg">{currentStreak} Hari</h3>
+              <p className="text-[10px] text-brand-600 uppercase tracking-wider font-semibold">Jurnal Rutin</p>
+            </div>
+            <div className={`p-4 rounded-2xl border ${hasHydroHomie ? 'bg-blue-50 border-blue-200 shadow-sm' : 'bg-white border-gray-100'} flex flex-col items-center justify-center text-center transition-colors`}>
+              <Droplet size={24} className={`mb-2 ${hasHydroHomie ? 'text-blue-500' : 'text-gray-300'}`} />
+              <h3 className="font-bold text-brand-900 text-sm">{hasHydroHomie ? 'Hydro Homie' : 'Belum Dicapai'}</h3>
+              <p className="text-[10px] text-brand-600 uppercase tracking-wider font-semibold">Minum 8 Gelas</p>
+            </div>
           </div>
         </motion.div>
 

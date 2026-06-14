@@ -16,6 +16,7 @@ export interface JournalEntry {
   weight?: number;
   sleepHours?: number;
   painLevel?: number; // 1-10 Scale
+  flowIntensity?: "bercak" | "ringan" | "sedang" | "berat";
   cyclePhaseAtEntry?: string; // Phase during that day
 }
 
