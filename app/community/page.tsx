@@ -50,10 +50,6 @@ export default function Community() {
       showAlert({ title: "Belum Masuk", text: "Anda harus login untuk memberi dukungan.", type: "error" });
       return;
     }
-    if (authorId === user.uid) {
-      showAlert({ title: "Oops!", text: "Anda tidak bisa memberi dukungan pada postingan sendiri.", type: "warning" });
-      return;
-    }
     
     // Toggle like
     const postRef = ref(db, `community/posts/${postId}/likes`);
