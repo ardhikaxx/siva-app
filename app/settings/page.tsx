@@ -5,7 +5,7 @@ import { useCycleData } from "@/context/CycleContext";
 import { useRouter } from "next/navigation";
 import { format, parseISO } from "date-fns";
 import { id } from "date-fns/locale";
-import { LogOut, User, Settings as SettingsIcon, AlertCircle, Trash2, Moon, Sun } from "lucide-react";
+import { LogOut, User, Settings as SettingsIcon, AlertCircle, Trash2, Moon } from "lucide-react";
 import { useAlert } from "@/context/AlertContext";
 import { useTheme } from "@/context/ThemeContext";
 import { useLanguage } from "@/context/LanguageContext";
