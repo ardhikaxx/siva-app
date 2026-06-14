@@ -15,7 +15,7 @@ interface Post {
   authorId: string;
   text: string;
   timestamp: number;
-  likes: number;
+  likes?: Record<string, boolean>;
 }
 
 export default function Community() {
@@ -45,6 +45,32 @@ export default function Community() {
     return () => unsubscribe();
   }, []);
 
+  const handleLike = async (postId: string, authorId: string, currentLikes: Record<string, boolean> = {}) => {
+    if (!user) {
+      showAlert({ title: "Belum Masuk", text: "Anda harus login untuk memberi dukungan.", type: "error" });
+      return;
+    }
+    if (authorId === user.uid) {
+      showAlert({ title: "Oops!", text: "Anda tidak bisa memberi dukungan pada postingan sendiri.", type: "warning" });
+      return;
+    }
+    
+    // Toggle like
+    const postRef = ref(db, `community/posts/${postId}/likes`);
+    const newLikes = { ...currentLikes };
+    
+    if (newLikes[user.uid]) {
+      delete newLikes[user.uid]; // Unlike
+    } else {
+      newLikes[user.uid] = true; // Like
+    }
+    
+    // Firebase real-time database update
+    import("firebase/database").then(({ update }) => {
+      update(ref(db, `community/posts/${postId}`), { likes: newLikes });
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) {
@@ -62,8 +88,7 @@ export default function Community() {
       await push(ref(db, 'community/posts'), {
         authorId: user.uid,
         text: newPostText,
-        timestamp: serverTimestamp(),
-        likes: 0
+        timestamp: serverTimestamp()
       });
       setNewPostText("");
       showAlert({ title: "Terkirim", text: "Pesan anonim Anda berhasil dibagikan!", type: "success" });
@@ -113,8 +138,14 @@ export default function Community() {
               </div>
               <p className="text-sm text-brand-800 leading-relaxed mb-3 whitespace-pre-wrap">{post.text}</p>
               <div className="flex items-center text-brand-400 text-xs font-medium">
-                <button className="flex items-center hover:text-brand-600 transition-colors">
-                  <Heart size={14} className="mr-1" /> Dukung
+                <button 
+                  onClick={() => handleLike(post.id, post.authorId, post.likes)}
+                  className={`flex items-center transition-colors px-2 py-1 -ml-2 rounded-lg ${
+                    user && post.likes?.[user.uid] ? 'text-brand-600 bg-brand-50' : 'hover:bg-brand-50 hover:text-brand-600'
+                  }`}
+                >
+                  <Heart size={14} className={`mr-1.5 ${user && post.likes?.[user.uid] ? 'fill-brand-500 text-brand-500' : ''}`} /> 
+                  {post.likes ? Object.keys(post.likes).length : 0} Dukungan
                 </button>
               </div>
             </div>

@@ -6,6 +6,10 @@
         ".write": "$uid === auth.uid"
       }
     },
+    "community": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
     "admin": {
       ".read": "auth.token.role === 'admin'",
       ".write": "auth.token.role === 'admin'"
