@@ -9,7 +9,7 @@ export interface CycleSettings {
   pastPeriods?: string[]; // Array of ISO Date Strings
   isSmartPrediction?: boolean; // Flag if we are using calculated average
   padInventory?: number; // Stock of sanitary pads
-  themeColor?: "peach" | "matcha" | "ocean" | "cyberpunk";
+  themeColor?: "peach" | "matcha" | "ocean" | "cyberpunk" | "lavender";
 }
 
 export interface CycleInfo {
