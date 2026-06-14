@@ -22,6 +22,8 @@ export default function Insights() {
       date: format(d, "dd MMM", { locale: id }),
       energy: entry?.energyLevel || null,
       mood: entry?.mood || "Tidak ada",
+      weight: entry?.weight || null,
+      sleep: entry?.sleepHours || null,
     };
   });
 
@@ -87,7 +89,10 @@ export default function Insights() {
         </div>
         <motion.button 
           whileTap={{ scale: 0.95 }}
-          onClick={() => window.location.href = '/report'}
+          onClick={() => {
+            // Check if router exists, else fallback to window.location (router requires import which we might need to add if not present)
+            window.location.href = '/report';
+          }}
           className="bg-brand-500 text-white text-xs font-bold px-3 py-2 rounded-xl shadow-sm flex items-center hover:bg-brand-600 transition-colors"
         >
           Cetak PDF
@@ -179,6 +184,49 @@ export default function Insights() {
             </ResponsiveContainer>
           </div>
         </motion.div>
+
+        {/* Weight and Sleep Chart */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="bg-white p-5 rounded-3xl shadow-sm border border-brand-100">
+            <div className="flex items-center mb-4">
+              <Activity size={20} className="text-blue-500 mr-2" />
+              <h2 className="font-bold text-brand-900">Berat Badan (Kg)</h2>
+            </div>
+            <div className="h-40 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={last7Days} margin={{ top: 5, right: 5, left: -20, bottom: 5 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e0e7ff" />
+                  <XAxis dataKey="date" tick={{fontSize: 10, fill: '#94a3b8'}} axisLine={false} tickLine={false} />
+                  <YAxis domain={['auto', 'auto']} tick={{fontSize: 10, fill: '#94a3b8'}} axisLine={false} tickLine={false} />
+                  <Tooltip 
+                    contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                  />
+                  <Line type="monotone" dataKey="weight" name="Berat (Kg)" stroke="#3b82f6" strokeWidth={3} dot={{r: 4, fill: '#3b82f6', strokeWidth: 2, stroke: '#fff'}} connectNulls />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </motion.div>
+
+          <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="bg-white p-5 rounded-3xl shadow-sm border border-brand-100">
+            <div className="flex items-center mb-4">
+              <Activity size={20} className="text-indigo-500 mr-2" />
+              <h2 className="font-bold text-brand-900">Durasi Tidur (Jam)</h2>
+            </div>
+            <div className="h-40 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={last7Days} margin={{ top: 5, right: 5, left: -20, bottom: 5 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e0e7ff" />
+                  <XAxis dataKey="date" tick={{fontSize: 10, fill: '#94a3b8'}} axisLine={false} tickLine={false} />
+                  <YAxis domain={[0, 12]} tick={{fontSize: 10, fill: '#94a3b8'}} axisLine={false} tickLine={false} />
+                  <Tooltip 
+                    contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                  />
+                  <Bar dataKey="sleep" name="Tidur (Jam)" fill="#6366f1" radius={[4, 4, 0, 0]} barSize={20} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </motion.div>
+        </div>
 
         {/* Symptoms Bar Chart */}
         <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="bg-white p-5 rounded-3xl shadow-sm border border-brand-100 mb-6">

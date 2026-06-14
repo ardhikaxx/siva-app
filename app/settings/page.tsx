@@ -23,7 +23,7 @@ export default function Settings() {
   const { t, language, setLanguage } = useLanguage();
   const [mounted, setMounted] = useState(false);
   const [imgError, setImgError] = useState(false);
-  const { permission, requestPermission, sendTestNotification } = useNotifications();
+  const { permission, requestPermission } = useNotifications();
 
   useEffect(() => {
     setTimeout(() => setMounted(true), 0);
@@ -193,6 +193,56 @@ export default function Settings() {
                 <option value="endometriosis">Endometriosis</option>
               </select>
             </div>
+
+            <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2">
+              <div>
+                <span className="text-sm text-brand-700 block font-medium">👤 Mode Pengguna</span>
+                <span className="text-xs text-brand-400 block max-w-[200px] mt-1 leading-tight">Sesuaikan aplikasi dengan fase hidup Anda</span>
+              </div>
+              <select 
+                value={settings?.userMode || "normal"}
+                onChange={(e) => updateSettings({ ...settings!, userMode: e.target.value as any })}
+                className="bg-brand-50 border border-brand-200 text-brand-900 text-xs rounded-lg focus:ring-brand-500 focus:border-brand-500 block p-2 outline-none"
+              >
+                <option value="normal">Normal</option>
+                <option value="ttc">Program Hamil (TTC)</option>
+                <option value="pregnancy">Kehamilan</option>
+                <option value="contraception">Kontrasepsi</option>
+              </select>
+            </div>
+
+            {settings?.userMode === "pregnancy" && (
+              <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2 bg-pink-50 p-3 rounded-xl">
+                <div>
+                  <span className="text-sm text-brand-700 block font-medium">👶 Hari Perkiraan Lahir (HPL)</span>
+                </div>
+                <input 
+                  type="date" 
+                  value={settings?.pregnancyDueDate || ""}
+                  onChange={(e) => updateSettings({ ...settings!, pregnancyDueDate: e.target.value })}
+                  className="bg-white border border-brand-200 text-brand-900 text-xs rounded-lg p-2 outline-none"
+                />
+              </div>
+            )}
+
+            {settings?.userMode === "contraception" && (
+              <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2 bg-blue-50 p-3 rounded-xl">
+                <div>
+                  <span className="text-sm text-brand-700 block font-medium">💊 Jenis Kontrasepsi</span>
+                </div>
+                <select 
+                  value={settings?.contraceptionType || "pill"}
+                  onChange={(e) => updateSettings({ ...settings!, contraceptionType: e.target.value as any })}
+                  className="bg-white border border-brand-200 text-brand-900 text-xs rounded-lg p-2 outline-none"
+                >
+                  <option value="pill">Pil KB</option>
+                  <option value="iud">IUD</option>
+                  <option value="implant">Implan</option>
+                  <option value="injection">Suntik</option>
+                  <option value="none">Lainnya</option>
+                </select>
+              </div>
+            )}
 
             <motion.button 
               whileTap={{ scale: 0.98 }}

@@ -47,6 +47,7 @@ export default function Journal() {
   const [waterGlasses, setWaterGlasses] = useState(0);
   const [temperature, setTemperature] = useState<number | ''>('');
   const [weight, setWeight] = useState<number | ''>('');
+  const [sleepHours, setSleepHours] = useState<number | ''>('');
   const [notes, setNotes] = useState("");
   const [isSaved, setIsSaved] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -64,6 +65,7 @@ export default function Journal() {
           setWaterGlasses(todayEntry.waterGlasses || 0);
           setTemperature(todayEntry.temperature || '');
           setWeight(todayEntry.weight || '');
+          setSleepHours(todayEntry.sleepHours || '');
           setNotes(todayEntry.notes || "");
         }, 0);
       }
@@ -99,6 +101,7 @@ export default function Journal() {
         waterGlasses,
         temperature: typeof temperature === 'number' ? temperature : undefined,
         weight: typeof weight === 'number' ? weight : undefined,
+        sleepHours: typeof sleepHours === 'number' ? sleepHours : undefined,
         notes,
         cyclePhaseAtEntry: info?.currentPhase || "unknown"
       });
@@ -296,8 +299,19 @@ export default function Journal() {
                   className="w-full px-4 py-3 bg-brand-50 border-none rounded-xl text-brand-900 focus:outline-none focus:ring-2 focus:ring-brand-400 font-medium text-sm transition-shadow"
                 />
               </div>
+              <div className="col-span-2 sm:col-span-1">
+                <label className="text-xs text-brand-600 font-medium block mb-2">Waktu Tidur (Jam)</label>
+                <input 
+                  type="number"
+                  step="0.5"
+                  placeholder="Contoh: 7.5"
+                  value={sleepHours}
+                  onChange={(e) => setSleepHours(e.target.value ? parseFloat(e.target.value) : '')}
+                  className="w-full px-4 py-3 bg-brand-50 border-none rounded-xl text-brand-900 focus:outline-none focus:ring-2 focus:ring-brand-400 font-medium text-sm transition-shadow"
+                />
+              </div>
             </div>
-            <p className="text-[10px] text-brand-500 mt-3 ml-1">Suhu tubuh basal (BBT) sangat berguna untuk melacak ovulasi.</p>
+            <p className="text-[10px] text-brand-500 mt-3 ml-1">Suhu tubuh basal (BBT) sangat berguna untuk melacak ovulasi. Durasi tidur memengaruhi keseimbangan hormon.</p>
           </motion.div>
 
           <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="bg-white p-6 rounded-3xl shadow-sm border border-brand-100">

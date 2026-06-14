@@ -12,8 +12,9 @@ export interface JournalEntry {
   waterGlasses?: number; // Target: 8 glasses
   notes?: string;
   expense?: number;
-  temperature?: number;
+  temperature?: number; // Used for BBT
   weight?: number;
+  sleepHours?: number;
   painLevel?: number; // 1-10 Scale
   cyclePhaseAtEntry?: string; // Phase during that day
 }

@@ -12,6 +12,9 @@ export interface CycleSettings {
   themeColor?: "peach" | "matcha" | "ocean" | "cyberpunk" | "lavender";
   pillReminderTime?: string; // Format: "HH:mm"
   syndromeMode?: "none" | "pcos" | "endometriosis";
+  userMode?: "normal" | "ttc" | "pregnancy" | "contraception";
+  pregnancyDueDate?: string; // ISO Date String
+  contraceptionType?: "pill" | "iud" | "implant" | "injection" | "none";
 }
 
 export interface CycleInfo {
@@ -23,6 +26,7 @@ export interface CycleInfo {
   ovulationDate: string; // ISO Date String
   daysUntilNextPeriod: number;
   isSmartPrediction: boolean;
+  pregnancyWeek?: number;
 }
 
 // Helper to calculate average cycle length based on past periods
@@ -51,7 +55,7 @@ export const calculateAverageCycleLength = (pastPeriods: string[], fallbackLengt
 };
 
 export const getPhaseForDate = (date: Date, settings: CycleSettings): Phase => {
-  const { lastPeriodStart, cycleLength, periodLength } = settings;
+  const { lastPeriodStart, cycleLength, periodLength, userMode } = settings;
   const targetDate = startOfDay(date);
   const lastPeriodDate = startOfDay(parseISO(lastPeriodStart));
   
@@ -73,7 +77,7 @@ export const getPhaseForDate = (date: Date, settings: CycleSettings): Phase => {
 };
 
 export const calculateCycleInfo = (settings: CycleSettings): CycleInfo => {
-  const { lastPeriodStart, periodLength, pastPeriods } = settings;
+  const { lastPeriodStart, periodLength, pastPeriods, userMode, pregnancyDueDate } = settings;
   
   // Apply smart prediction if history exists
   let effectiveCycleLength = settings.cycleLength;
@@ -105,6 +109,15 @@ export const calculateCycleInfo = (settings: CycleSettings): CycleInfo => {
 
   const daysUntilNextPeriod = differenceInDays(nextPeriodDateObj, today);
 
+  let pregnancyWeek = undefined;
+  if (userMode === "pregnancy" && pregnancyDueDate) {
+    // 40 weeks total, calculate backwards from due date
+    const dueDateObj = startOfDay(parseISO(pregnancyDueDate));
+    const conceptionDateObj = subDays(dueDateObj, 280); // roughly 40 weeks
+    const daysPregnant = differenceInDays(today, conceptionDateObj);
+    pregnancyWeek = Math.max(1, Math.min(42, Math.floor(daysPregnant / 7) + 1));
+  }
+
   return {
     cycleDayToday,
     currentPhase,
@@ -113,7 +126,8 @@ export const calculateCycleInfo = (settings: CycleSettings): CycleInfo => {
     fertileWindowStart: formatISO(fertileWindowStartObj, { representation: 'date' }),
     fertileWindowEnd: formatISO(fertileWindowEndObj, { representation: 'date' }),
     daysUntilNextPeriod,
-    isSmartPrediction
+    isSmartPrediction,
+    pregnancyWeek
   };
 };
 
