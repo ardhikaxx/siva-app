@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   devIndicators: false,
+  turbopack: {},
 };
 
 export default withPWA(nextConfig);
