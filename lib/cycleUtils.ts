@@ -11,6 +11,7 @@ export interface CycleSettings {
   padInventory?: number; // Stock of sanitary pads
   themeColor?: "peach" | "matcha" | "ocean" | "cyberpunk" | "lavender";
   pillReminderTime?: string; // Format: "HH:mm"
+  syndromeMode?: "none" | "pcos" | "endometriosis";
 }
 
 export interface CycleInfo {

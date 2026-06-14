@@ -8,9 +8,19 @@ import { useCycleData } from "@/context/CycleContext";
 import { FileText, Edit3 } from "lucide-react";
 import { useAlert } from "@/context/AlertContext";
 
-const availableSymptoms = [
+const baseSymptoms = [
   "Kram", "Sakit Kepala", "Kembung", "Nyeri Punggung", 
   "Payudara Sensitif", "Mual", "Jerawat", "Kelelahan"
+];
+
+const pcosSymptoms = [
+  "Jerawat Parah", "Hirsutisme (Rambut Berlebih)", "Kelelahan Ekstrem", 
+  "Gula Darah Tinggi", "Nyeri Panggul", "Rambut Rontok", "Kram", "Kembung"
+];
+
+const endoSymptoms = [
+  "Nyeri Panggul Kronis", "Nyeri Saat BAB/BAK", "Nyeri Punggung Bawah Menjalar", 
+  "Mual & Muntah", "Bercak Darah (Spotting)", "Kram Sangat Hebat", "Kelelahan"
 ];
 
 const availableMedications = [
@@ -21,7 +31,7 @@ const moods = ["Senang", "Tenang", "Biasa", "Cemas", "Sedih", "Mudah Tersinggung
 
 export default function Journal() {
   const { entries, saveEntry, getEntry, loading: journalLoading } = useJournal();
-  const { info } = useCycleData();
+  const { info, settings } = useCycleData();
   const { showAlert } = useAlert();
   
   const todayKey = format(new Date(), "yyyy-MM-dd");
@@ -128,6 +138,10 @@ export default function Journal() {
     );
   }
 
+  const activeSymptoms = settings?.syndromeMode === 'pcos' ? pcosSymptoms : 
+                         settings?.syndromeMode === 'endometriosis' ? endoSymptoms : 
+                         baseSymptoms;
+
   // Mengurutkan entri dari yang paling baru
   const sortedHistory = Object.entries(entries).sort((a, b) => b[0].localeCompare(a[0]));
 
@@ -214,9 +228,13 @@ export default function Journal() {
           </div>
           
           <div className="bg-white p-6 rounded-3xl shadow-sm border border-brand-100">
-            <h2 className="text-sm font-semibold text-brand-900 mb-4">Keluhan Fisik</h2>
+            <h2 className="text-sm font-semibold text-brand-900 mb-4 flex items-center">
+              Keluhan Fisik 
+              {settings?.syndromeMode === 'pcos' && <span className="ml-2 text-[10px] bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full uppercase">Mode PCOS</span>}
+              {settings?.syndromeMode === 'endometriosis' && <span className="ml-2 text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded-full uppercase">Mode Endometriosis</span>}
+            </h2>
             <div className="flex flex-wrap gap-2">
-              {availableSymptoms.map(sym => (
+              {activeSymptoms.map(sym => (
                 <button
                   key={sym}
                   type="button"

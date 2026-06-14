@@ -160,6 +160,22 @@ export default function Settings() {
             </div>
           </div>
 
+          <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2">
+            <div>
+              <span className="text-sm text-brand-700 block font-medium">🩺 {t('settings_syndrome_mode')}</span>
+              <span className="text-xs text-brand-400 block max-w-[200px] mt-1 leading-tight">Ubah opsi keluhan jurnal menjadi spesifik</span>
+            </div>
+            <select 
+              value={settings?.syndromeMode || "none"}
+              onChange={(e) => updateSettings({ ...settings!, syndromeMode: e.target.value as any })}
+              className="bg-brand-50 border border-brand-200 text-brand-900 text-xs rounded-lg focus:ring-brand-500 focus:border-brand-500 block p-2 outline-none"
+            >
+              <option value="none">{t('settings_syndrome_none')}</option>
+              <option value="pcos">PCOS</option>
+              <option value="endometriosis">Endometriosis</option>
+            </select>
+          </div>
+
           <button 
             onClick={() => router.push("/onboarding?edit=true")}
             className="w-full text-brand-600 text-sm font-semibold py-2 mt-4 bg-brand-50 rounded-xl hover:bg-brand-100 transition-colors"
