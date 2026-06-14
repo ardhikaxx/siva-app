@@ -6,7 +6,7 @@ import { useCycleData } from "@/context/CycleContext";
 import { formatISO, parseISO, format } from "date-fns";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAlert } from "@/context/AlertContext";
-import { CalendarDays, Clock, Activity, ArrowRight, Sparkles } from "lucide-react";
+import { CalendarDays, Clock, Activity, ArrowRight, Flower2 } from "lucide-react";
 
 function OnboardingContent() {
   const router = useRouter();
@@ -102,7 +102,7 @@ function OnboardingContent() {
             transition={{ delay: 0.2, type: "spring" }}
             className="w-16 h-16 bg-gradient-to-tr from-brand-400 to-brand-600 rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-lg transform rotate-3"
           >
-            <Sparkles className="text-white" size={32} />
+            <Flower2 className="text-white" size={32} />
           </motion.div>
           <h1 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-800 mb-2 tracking-tight">
             Selamat Datang di SIVA
@@ -207,7 +207,7 @@ function OnboardingContent() {
                 type="submit"
                 className="w-full py-4 bg-gradient-to-r from-brand-500 to-brand-600 text-white rounded-2xl font-bold shadow-lg shadow-brand-200 transition-all flex items-center justify-center"
               >
-                <Sparkles size={18} className="mr-2" /> {isEditMode ? "Simpan Perubahan" : "Mulai Perjalanan SIVA"}
+                <Flower2 size={18} className="mr-2" /> {isEditMode ? "Simpan Perubahan" : "Mulai Perjalanan SIVA"}
               </motion.button>
             )}
           </div>
