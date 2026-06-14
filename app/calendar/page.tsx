@@ -7,6 +7,7 @@ import { format, parseISO, startOfMonth, endOfMonth, eachDayOfInterval, startOfW
 import { id } from "date-fns/locale";
 import { ChevronLeft, ChevronRight, Droplet, FileText } from "lucide-react";
 import { getPhaseForDate, Phase } from "@/lib/cycleUtils";
+import { motion } from "framer-motion";
 
 export default function Calendar() {
   const { settings, info, loading: cycleLoading } = useCycleData();
@@ -80,29 +81,44 @@ export default function Calendar() {
   const selectedPhase = selectedDate && settings ? getPhaseForDate(selectedDate, settings) : null;
 
   return (
-    <div className="min-h-screen bg-brand-50 p-6 flex flex-col pb-24">
-      <header className="mb-6 pt-4 flex justify-between items-center">
+    <div className="min-h-screen bg-brand-50 p-6 flex flex-col pb-24 overflow-x-hidden">
+      <motion.header 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mb-6 pt-4 flex justify-between items-center"
+      >
         <h1 className="text-2xl font-bold text-brand-900">Kalender</h1>
-        <button 
+        <motion.button 
+          whileTap={{ scale: 0.95 }}
           onClick={() => setCurrentDate(new Date())}
           className="text-sm font-semibold text-brand-600 bg-white px-3 py-1.5 rounded-xl shadow-sm border border-brand-100"
         >
           Hari Ini
-        </button>
-      </header>
+        </motion.button>
+      </motion.header>
 
-      <div className="bg-white p-5 rounded-[2rem] shadow-sm border border-brand-100 mb-6">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ type: "spring", stiffness: 200, damping: 20 }}
+        className="bg-white p-5 rounded-[2rem] shadow-sm border border-brand-100 mb-6"
+      >
         {/* Calendar Header */}
         <div className="flex justify-between items-center mb-6">
-          <button onClick={prevMonth} className="p-2 bg-brand-50 text-brand-600 rounded-full hover:bg-brand-100">
+          <motion.button whileTap={{ scale: 0.8 }} onClick={prevMonth} className="p-2 bg-brand-50 text-brand-600 rounded-full hover:bg-brand-100">
             <ChevronLeft size={20} />
-          </button>
-          <h2 className="font-bold text-lg text-brand-900 uppercase tracking-wide">
+          </motion.button>
+          <motion.h2 
+            key={currentDate.toString()}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="font-bold text-lg text-brand-900 uppercase tracking-wide"
+          >
             {format(currentDate, "MMMM yyyy", { locale: id })}
-          </h2>
-          <button onClick={nextMonth} className="p-2 bg-brand-50 text-brand-600 rounded-full hover:bg-brand-100">
+          </motion.h2>
+          <motion.button whileTap={{ scale: 0.8 }} onClick={nextMonth} className="p-2 bg-brand-50 text-brand-600 rounded-full hover:bg-brand-100">
             <ChevronRight size={20} />
-          </button>
+          </motion.button>
         </div>
 
         {/* Days of week */}
@@ -111,7 +127,16 @@ export default function Calendar() {
         </div>
 
         {/* Calendar Grid */}
-        <div className="grid grid-cols-7 gap-1 text-center">
+        <motion.div 
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.01 } }
+          }}
+          initial="hidden"
+          animate="visible"
+          key={currentDate.toString()}
+          className="grid grid-cols-7 gap-1 text-center"
+        >
           {days.map((day, i) => {
             const isSameMnth = isSameMonth(day, monthStart);
             const dateKey = format(day, "yyyy-MM-dd");
@@ -127,7 +152,9 @@ export default function Calendar() {
             }
 
             return (
-              <div 
+              <motion.div 
+                variants={{ hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1 } }}
+                whileTap={{ scale: 0.9 }}
                 key={i} 
                 onClick={() => setSelectedDate(day)}
                 className={`relative p-2 h-12 flex flex-col items-center justify-center rounded-2xl cursor-pointer transition-all
@@ -145,23 +172,32 @@ export default function Calendar() {
                   {(entries[dateKey]?.waterGlasses ?? 0) >= 8 && <div className="w-1.5 h-1.5 rounded-full bg-cyan-400"></div>}
                   {phase === "menstruasi" && isSameMnth && <div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div>}
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Legend */}
-      <div className="flex flex-wrap gap-2 justify-center mb-6">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+        className="flex flex-wrap gap-2 justify-center mb-6"
+      >
         <div className="flex items-center text-xs text-gray-600"><div className="w-2.5 h-2.5 rounded-full bg-brand-500 mr-1.5"></div> Menstruasi</div>
         <div className="flex items-center text-xs text-gray-600"><div className="w-2.5 h-2.5 rounded-full bg-blue-400 mr-1.5"></div> Folikular</div>
         <div className="flex items-center text-xs text-gray-600"><div className="w-2.5 h-2.5 rounded-full bg-purple-500 mr-1.5"></div> Ovulasi</div>
         <div className="flex items-center text-xs text-gray-600"><div className="w-2.5 h-2.5 rounded-full bg-yellow-500 mr-1.5"></div> Luteal</div>
-      </div>
+      </motion.div>
 
       {/* Detail for selected date */}
       {selectedDate && selectedPhase && (
-        <div className="bg-white p-5 rounded-3xl shadow-sm border border-brand-100 flex-1 animate-in fade-in slide-in-from-bottom-4 duration-300">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white p-5 rounded-3xl shadow-sm border border-brand-100 flex-1"
+        >
           <h3 className="font-bold text-lg text-brand-900 mb-1 border-b border-brand-50 pb-2">
             {format(selectedDate, "EEEE, d MMMM yyyy", { locale: id })}
           </h3>
@@ -173,7 +209,11 @@ export default function Calendar() {
           </div>
 
           {selectedEntry ? (
-            <div className="space-y-3">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="space-y-3"
+            >
               <div className="flex items-center">
                 <FileText size={16} className="text-gray-400 mr-2" />
                 <span className="text-sm font-semibold text-gray-700">Jurnal Hari Ini:</span>
@@ -223,14 +263,14 @@ export default function Calendar() {
                   </div>
                 )}
               </div>
-            </div>
+            </motion.div>
           ) : (
-            <div className="py-6 text-center text-gray-400">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="py-6 text-center text-gray-400">
               <FileText size={32} className="mx-auto mb-2 opacity-50" />
               <p className="text-sm">Tidak ada catatan jurnal di tanggal ini.</p>
-            </div>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
       )}
     </div>
   );
