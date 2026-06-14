@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, CalendarDays, BookOpen, Settings, PieChart, BookText } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { motion } from "framer-motion";
 
 export default function BottomNav() {
   const pathname = usePathname();
@@ -20,21 +21,45 @@ export default function BottomNav() {
   ];
 
   return (
-    <nav className="fixed bottom-0 w-full bg-white border-t border-brand-100 pb-safe pb-4 pt-2 px-6 flex justify-between items-center shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-50">
-      {links.map((link) => {
-        const isActive = pathname === link.href;
-        const Icon = link.icon;
-        return (
-          <Link key={link.href} href={link.href} className="flex flex-col items-center">
-            <div className={`p-2 rounded-2xl transition-colors ${isActive ? "bg-brand-100 text-brand-600" : "text-brand-300 hover:text-brand-500"}`}>
-              <Icon size={24} />
-            </div>
-            <span className={`text-[10px] mt-1 font-medium ${isActive ? "text-brand-700" : "text-brand-400"}`}>
-              {link.label}
-            </span>
-          </Link>
-        );
-      })}
-    </nav>
+    <div className="fixed bottom-6 left-4 right-4 z-50 flex justify-center pointer-events-none">
+      <nav className="pointer-events-auto bg-white/90 backdrop-blur-xl border border-white/50 px-2 py-3 flex justify-between items-center shadow-[0_10px_40px_rgba(0,0,0,0.15)] rounded-full w-full max-w-[360px] relative">
+        {links.map((link) => {
+          const isActive = pathname === link.href;
+          const Icon = link.icon;
+          return (
+            <Link key={link.href} href={link.href} className="relative flex flex-col items-center justify-center w-[60px] h-12 z-10 tap-highlight-transparent">
+              {isActive && (
+                <motion.div
+                  layoutId="bottomNavBubble"
+                  className="absolute inset-0 bg-brand-50 rounded-full -z-10"
+                  transition={{ type: "spring", bounce: 0.25, duration: 0.5 }}
+                />
+              )}
+              <motion.div
+                initial={false}
+                animate={{ 
+                  y: isActive ? -10 : 0,
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className={`flex flex-col items-center ${isActive ? "text-brand-600" : "text-gray-400 hover:text-brand-400 transition-colors"}`}
+              >
+                <div className={`p-2.5 rounded-full ${isActive ? "bg-brand-500 text-white shadow-lg shadow-brand-200" : "bg-transparent"}`}>
+                  <Icon size={22} strokeWidth={isActive ? 2.5 : 2} />
+                </div>
+                {isActive && (
+                  <motion.span 
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-[10px] mt-1 font-bold text-brand-700 absolute -bottom-4 whitespace-nowrap"
+                  >
+                    {link.label}
+                  </motion.span>
+                )}
+              </motion.div>
+            </Link>
+          );
+        })}
+      </nav>
+    </div>
   );
 }
