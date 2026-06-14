@@ -35,4 +35,3 @@ DAFTAR LENGKAP & DETAIL FITUR APLIKASI SIVA
 31. Tema UI Dinamis (Color Switcher): Personalisasi penuh warna antarmuka aplikasi dengan tema siap pakai: Peach, Matcha, Ocean, Cyberpunk, dan Lavender.
 32. Dukungan Terjemahan Otomatis (I18n): Fitur transisi mulus untuk merubah seluruh teks dalam aplikasi ke Bahasa Indonesia (ID) atau Bahasa Inggris (EN).
 33. Desain PWA Responsif & Animasi Premium: Aplikasi dirancang dengan prinsip Progressive Web App (dapat di-install ke HP/PC) yang dilengkapi interaksi elemen bergaya Glassmorphism dan animasi transisi Framer Motion.
-34. Privasi & Keamanan Cloud: Seluruh rekaman jurnal disimpan secara real-time (Firebase Database) dengan perlindungan privasi ketat (sengaja didesain tanpa notifikasi ke pasangan atau fitur pelacak keuangan demi otonomi medis wanita).
