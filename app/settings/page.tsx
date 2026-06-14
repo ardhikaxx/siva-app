@@ -7,7 +7,7 @@ import { format, parseISO } from "date-fns";
 import { id } from "date-fns/locale";
 import { LogOut, User, Settings as SettingsIcon, AlertCircle, Trash2, Moon } from "lucide-react";
 import { useAlert } from "@/context/AlertContext";
-import { useTheme } from "@/context/ThemeContext";
+
 import { useLanguage } from "@/context/LanguageContext";
 import { useEffect, useState } from "react";
 import { useNotifications } from "@/hooks/useNotifications";
@@ -19,7 +19,6 @@ export default function Settings() {
   const { settings, updateSettings } = useCycleData();
   const router = useRouter();
   const { confirm, showAlert } = useAlert();
-  const { theme, setTheme } = useTheme();
   const { t, language, setLanguage } = useLanguage();
   const [mounted, setMounted] = useState(false);
   const [imgError, setImgError] = useState(false);
@@ -148,17 +147,7 @@ export default function Settings() {
               </div>
             </div>
 
-            <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2">
-              <span className="text-sm text-brand-700 flex items-center"><Moon size={16} className="mr-2" /> {t('settings_dark_mode')}</span>
-              {mounted && (
-                <button
-                  onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                  className="w-12 h-6 bg-brand-200 rounded-full relative flex items-center px-1"
-                >
-                  <div className={`w-4 h-4 rounded-full bg-brand-500 transition-transform ${theme === 'dark' ? 'translate-x-6' : ''}`}></div>
-                </button>
-              )}
-            </div>
+
 
             <div className="flex justify-between items-center border-t border-brand-50 pt-4 mt-2">
               <span className="text-sm text-brand-700 flex items-center">🌐 {t('settings_language')}</span>

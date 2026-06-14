@@ -36,7 +36,6 @@ SIVA adalah aplikasi *FemTech* revolusioner dan komprehensif yang dirancang untu
 
 ### 6. Kustomisasi UI/UX
 *   **Tema Dinamis:** Ganti warna aplikasi (Peach, Matcha, Ocean, Cyberpunk, Lavender) sesuai selera.
-*   **Mode Gelap (Dark Mode):** Nyaman di mata untuk penggunaan malam hari.
 *   **Dukungan Multi-Bahasa:** Tersedia dalam Bahasa Indonesia (ID) dan English (EN).
 *   **Transisi Halus:** Didukung oleh Framer Motion untuk *micro-interactions* yang premium.
 
