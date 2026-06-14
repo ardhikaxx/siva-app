@@ -167,7 +167,7 @@ export default function Settings() {
             </div>
             <select 
               value={settings?.syndromeMode || "none"}
-              onChange={(e) => updateSettings({ ...settings!, syndromeMode: e.target.value as any })}
+              onChange={(e) => updateSettings({ ...settings!, syndromeMode: e.target.value as "none" | "pcos" | "endometriosis" })}
               className="bg-brand-50 border border-brand-200 text-brand-900 text-xs rounded-lg focus:ring-brand-500 focus:border-brand-500 block p-2 outline-none"
             >
               <option value="none">{t('settings_syndrome_none')}</option>
